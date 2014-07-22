@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mobile Guardian Cross Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/gc.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+<script type="text/javascript" src="js/loader.min.js"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40784747-1', 'fc2.com');
+  ga('send', 'pageview');
+
+</script>
+<style type="text/css">
+.wrap {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+}
+
+.separator {
+    font-size: 16px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 5px 0 5px 0;
+}
+</style>
+<script type="text/javascript">
+function mobile_init() {
+}
+
+$(function() {
+    Loader.load(function() {
+        Loader.loadFiles(["js/view_m_cards.js"], mobile_init)
+    });
+});
+</script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+  <div data-role="header"><h1>Guardian Cross Cards</h1></div>
+  <div role="main" class="ui-content">
+    <div data-role="listview">
+        <li><a href="javascript:navNews();">What's New</a></li>
+        <li><a href="#cards">Cards</a></li>
+        <li><a href="#ex_cards">ExCards</a></li>
+        <li><a href="javascript:navTops();">Top</a></li>
+        <li><a href="javascript:navAttributes();">Attributes</a></li>
+        <li><a href="javascript:navSkills();">Skills</a></li>
+        <div class="separator"></div>
+        <li><a href="#acknowledgements">Acknowledgements</a></li>
+        <li><a href="#about">About</a></li>
+    </div>
+  </div> 
+</div>
+
+<div data-role="page" id="cards">
+  <div data-role="header">
+    <h1>Cards</h1>
+    <a href="#home" class="ui-btn-left">Home</a>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="listview">
+        <li><a href="javascript:navByStars(0);">Stars</a></li>
+        <li><a href="javascript:navByPlaces(0);">Encounter Place</a></li>
+        <li><a href="javascript:navByAttributes(0);">Attribute</a></li>
+        <li><a href="javascript:navByBorders(0);">Border</a></li>
+        <li><a href="javascript:navByShapes(0);">Shape</a></li>
+        <li><a href="javascript:navBySkills(0);">Skill</a></li>
+    </div>
+  </div> 
+</div>
+
+<div data-role="page" id="ex_cards">
+  <div data-role="header">
+    <h1>ExCards</h1>
+    <a href="#home" class="ui-btn-left">Home</a>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="listview">
+        <li><a href="javascript:navByStars(1);">Stars</a></li>
+        <li><a href="javascript:navByPlaces(1);">Encounter Place</a></li>
+        <li><a href="javascript:navByAttributes(1);">Attribute</a></li>
+        <li><a href="javascript:navByBorders(1);">Border</a></li>
+        <li><a href="javascript:navByShapes(1);">Shape</a></li>
+        <li><a href="javascript:navBySkills(1);">Skill</a></li>
+    </div>
+  </div> 
+</div>
+
+<div data-role="page" id="acknowledgements">
+  <div data-role="header">
+    <h1>Acknowledgements</h1>
+    <a href="#home" class="ui-btn-left">Home</a>
+  </div>
+  <div role="main" class="ui-content">
+    <div data-role="listview">
+        <li>
+            BetaTester@gcf
+            <p><a href="http://guardiancross-forum.com/User-BetaTester">BetaTester@gcf</a></p>
+            <p><a href="http://www.guardiancrossx.com">Guardian Cross TCG Card Database</a></p>
+        </li>
+        <li>
+            最強ガーディアン・クルス 攻略wiki
+            <p><a href="http://w.livedoor.jp/guardianc/">最強ガーディアン・クルス 攻略wiki</a></p>
+        </li>
+        <li>
+            Users from Guardian Cross Forum
+            <p><a href="http://guardiancross-forum.com">Guardian Cross Forum</a></p>
+            <p>Especially users in <a href="http://guardiancross-forum.com/Thread-Help-for-Stat-sites-important-for-all-of-us">this thread</a></p>
+        </li>
+        <li>
+            Users from 巴哈姆特
+            <p><a href="http://forum.gamer.com.tw/B.php?bsn=21351&subbsn=0">巴哈姆特 十字守衛者 哈拉板</a></p>
+        </li>
+        <li>
+            Many others
+            <p>Users who post their feedbacks in <a href="http://gccards.bbs.fc2.com">GCCards BBS</a></p>
+            <p>...</p>
+        </li>
+    </div>
+  </div> 
+</div>
+
+<div data-role="page" id="about">
+  <div data-role="header">
+    <h1>About</h1>
+    <a href="#home" class="ui-btn-left">Home</a>
+  </div>
+  <div role="main" class="ui-content">
+    <p>Developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a></p>
+    <p>All images are owned by Square Enix Co., Ltd.</p>
+    <p>Use of this website is at your own risk. No warranty is provided.</p>
+  </div> 
+</div>
+
+</body>
+</html>

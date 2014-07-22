@@ -1,0 +1,9 @@
+#!/bin/bash
+
+FORMAT=jpeg
+EXT=jpg
+
+for i in `ls *.png`; do
+  sips -s format ${FORMAT} ${i} --out ${i/png/${EXT}}
+  convert -resize 50% ${i/png/${EXT}} ${i/png/${EXT}}
+done

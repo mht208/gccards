@@ -1,0 +1,103 @@
+#!/bin/bash
+
+R=release
+GCC=gccards
+DATE=`date +%Y-%m-%d`
+USER=gccards
+PASSWORD=`cat password`
+SITE=gccards.web.fc2.com
+
+args=("$@")
+size=${#*}
+
+if [[ ${size} -lt 1 || (${size} -lt 2 && "${1}" != "r") ]]; then
+  echo "./procimgs VER ID1 ID2 ID3 ..."
+  exit
+fi
+
+ver=${args[0]}
+files="js/version.js js/version.min.js"
+
+if [[ "${ver}" == "js" ]]; then
+
+  for i in `seq 1 $((size - 1))`; do
+    file1=js/${args[${i}]}.js
+    file2=js/${args[${i}]}.min.js
+    files="${files} ${file1} ${file2}"
+  done
+
+  lftp -u ${USER},${PASSWORD} ${SITE} <<EOF
+cd /js/
+echo "Will upload ${files}"
+mput ${files}
+quit 0
+EOF
+
+elif [[ "${ver}" == "html" ]]; then
+
+  for i in `seq 1 $((size - 1))`; do
+    file=${args[${i}]}.html
+    files="${files} ${file}"
+  done
+
+  lftp -u ${USER},${PASSWORD} ${SITE} <<EOF
+cd /
+echo "Will upload ${files}"
+mput ${files}
+quit 0
+EOF
+
+elif [[ "${ver}" == "css" ]]; then
+
+  for i in `seq 1 $((size - 1))`; do
+    file1=css/${args[${i}]}.css
+    file2=css/${args[${i}]}.min.css
+    files="${files} ${file1} ${file2}"
+  done
+
+  lftp -u ${USER},${PASSWORD} ${SITE} <<EOF
+cd /css/
+echo "Will upload ${files}"
+mput ${files}
+quit 0
+EOF
+
+elif [[ "${ver}" == "en" || "${ver}" == "jp" ]]; then
+
+  for i in `seq 1 $((size - 1))`; do
+    id=${args[${i}]}
+    for folder in avatars battle guardians; do
+      if [[ "${folder}" == "avatars" ]]; then
+        prefix=card_thu
+      elif [[ "${folder}" == "battle" ]]; then
+        prefix=battle_
+      else
+        prefix=card
+      fi
+      path=images/${ver}/${folder}/${prefix}${id}
+      files="${files} ${path}.jpg ${path}.png"
+    done
+  done
+
+  lftp -u ${USER},${PASSWORD} ${SITE} <<EOF
+cd /
+echo "Will upload ${files}"
+mput -d ${files}
+quit 0
+EOF
+
+elif [[ "${ver}" == "r" ]]; then
+  if [[ -f ${R}/${GCC}-${DATE}.zip ]]; then
+    file=${R}/${GCC}-${DATE}.zip
+  elif [[ -f ${R}/${GCC}-${args[1]}.zip ]]; then
+    file=${R}/${GCC}-${args[1]}.zip
+  fi
+  if [[ "${file}" != "" ]]; then
+  lftp -u ${USER},${PASSWORD} ${SITE} <<EOF
+cd /
+echo "Will upload ${file}"
+mput -d ${file}
+quit 0
+EOF
+  fi
+fi

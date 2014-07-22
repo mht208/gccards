@@ -1,0 +1,10 @@
+.DS_Store
+js/*.min.js
+css/*.min.css
+import/*/*.png
+images/en/*/*.png
+images/en/*/*.jpg
+images/jp/*/*.png
+images/jp/*/*.jpg
+release
+password

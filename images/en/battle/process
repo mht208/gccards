@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [[ "${1}" != "" ]]; then
+  sips -s format jpeg battle_${1}.png --out battle_${1}.jpg
+fi

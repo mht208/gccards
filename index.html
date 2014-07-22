@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Guardian Cross - Damage Calculator</title>
+<link rel="stylesheet" type="text/css" href="css/gc.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/loader.min.js"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40784747-1', 'fc2.com');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript">
+$(function() {
+    Loader.load(function() {
+        Loader.loadFiles(["js/view_index.js"], function() { loadCards(); })   
+    });
+});
+</script>
+<link href="css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<div id="dialog" style="display: none;">
+    <div id="cards_selection" title="Cards Selection">
+    </div>
+    <div id="related_links" title="Related Links">
+      <ul>
+        <li><a href="http://www.guardiancrossx.com" target="_blank">Guardian Cross TCG Card Database</a></li>
+        <li><a href="http://guardiancross-forum.com" target="_blank">Guardian Cross Forum</a></li>
+        <li><a href="http://guardian-cross.wikia.com/wiki/Guardian_Cross_Wiki" target="_blank">Guardian Cross Wiki</a></li>
+        <li><a href="http://gc-compendium.blogspot.co.uk/p/blog-page.html" target="_blank">Guardian Cross Compendium</a></li>
+        <li><a href="http://w.livedoor.jp/guardianc/" target="_blank">最強ガーディアン・クルス 攻略wiki</a></li>
+        <li><a href="http://forum.gamer.com.tw/A.php?bsn=22343" target="_blank">十字守衛者 哈拉板</a></li>
+        <li><a href="http://guardiancross.wikidot.com" target="_blank">Guardian Cross Wiki (outdated)</a></li>
+      </ul>
+    </div>
+    <div id="acknowledgements" title="Acknowledgements">
+        <ul>
+            <li><a href="http://guardiancross-forum.com/User-BetaTester">BetaTester@gcf</a>:
+            <a href="http://www.guardiancrossx.com">GCX</a> - the first card database with OHKO calculation</li>
+            <li><a href="http://w.livedoor.jp/guardianc/">Japanese GC wiki</a></li>
+            <li>People in <a href="http://guardiancross-forum.com">Guardian Cross Forum</a>:
+                <ul>
+                    <li><a href="http://guardiancross-forum.com/Thread-Help-for-Stat-sites-important-for-all-of-us">Help for Stat sites - important for all of us!</a></li>
+                    <li><a href="http://guardiancross-forum.com/Thread-GCX-data-compilation-thread">GCX data compilation thread</a></li>
+                </ul>
+            </li>
+            <li>Some people in <a href="http://forum.gamer.com.tw/B.php?bsn=22343&amp;subbsn=0">巴哈姆特十字守衛者哈拉板</a></li>
+            <li>People who send me feedbacks in <a href="gccards.bbs.fc2.com">GCCards BBS</a></li>
+        </ul>
+    </div>
+    <div id="helpsneeded" title="Helps Needed">
+    </div>
+    <div id="faq_formula" title="Damage Formula" class="small-font">
+        <p style="color: red;">
+            Note: The damage computed may not be totally correct.
+        </p>
+        <p>
+            Consider two guardians g1 and g2 where g1 is the attacker and g2 is the defender.
+            All buffs have positive values while debuffs have negative values.
+            The total damage is
+        </p>
+        <p style="text-align: center;">
+            <b>QS + Max(Normal, Skill)</b>
+        </p>
+        <p>
+            where
+        </p>
+            <dl>
+              <dt>QS</dt>
+              <dd>The damage caused by QS</dd>
+              <dt>Normal</dt>
+              <dd>The damage caused by a normal hit</dd>
+              <dt>Skill</dt>
+              <dd>The damage caused by a physical or elemental skill</dd>
+            </dl>
+        <p>
+            Note that Skill is always 0 if g2 has Sap.
+            You may ignore the effect of Sap by enabling the option "Ignore Sap (Opponent)".
+            Each damage of QS, Normal, and Skill is computed by the following formula.
+        </p>
+        <p style="text-align: center;">
+            <b>Damage Formula: Max(1, AW * (1 + B + S) * A - (DW * (1 + D)) / 2)</b>
+        </p>
+        <dl>
+            <dt>AW</dt>
+            <dd>ATK / WIS of g1</dd>
+            <dt>B</dt>
+            <dd>
+              <ul>
+                <li>0 if the skill casted by g1 is QS</li>
+                <li>(Debuff of g2) if g2 has Ethereal Pulse</li>
+                <li>(Buff of g1 + Debuff of g2) otherwise</li>
+              </ul>
+            </dd>
+            <dt>S</dt>
+            <dd>
+              Skill level
+              <ul>
+                <li>Skill+1: 0.065</li>
+                <li>Skill+2: 0.12</li>
+                <li>Skill+3: 0.25</li>
+                <li>Skill+4: 0.5</li>
+                <li>Skill+4x: 0.6</li>
+                <li>Normal: 0</li>
+                <li>Gigant Smash: 1 (critical), -0.5 (glancing blow)</li>
+                <li>QS: -0.15</li>
+                <li>Blood Gambit: 0.5</li>
+                <li>Lifeleech: 0.5</li>
+                <li>Reaper's Luck: 0.5</li>
+              </ul>
+            </dd>
+            <dt>A</dt>
+            <dd>
+              Attribute
+              <ul>
+                <li>Normal, Physical, Blood Gambit: 1</li>
+                <li>Elemental Critical: 1.15</li>
+                <li>Elemental Blocked, g2 has Full Barrier: 0.85</li>
+                <li>Gigant Smash: 1</li>
+              </ul>
+            </dd>
+            <dt>DW</dt>
+            <dd>DEF / WIS of g2</dd>
+            <dt>D</dt>
+            <dd>
+              <ul>
+                <li>-1 if the skill casted by g1 is Gigant Smash</li>
+                <li>(Debuff of g1 + Buff of g2) otherwise</li>
+              </ul>
+            </dd>
+        </dl>
+        <p>
+            The damage caused by death skills is computed in the same way although it should be incorrect.
+        </p>
+    </div>
+    <div id="faq_skills" title="Skills and Options">
+        <h3>Recommended Skills</h3>
+        <p>
+        You may set your own recommended skills by the following buttons.
+        <ul>
+        <li><img src='images/save_24x24.jpg'/> - Save the recommended skills for the card of the selected type.</li>
+        <li><img src='images/save_all_24x24.jpg'/> - Save the recommended skills for the card of all types.</li>
+        <li><img src='images/revert_24x24.jpg'/> - Revert the recommended skills for the card of the selected type.</li>
+        <li><img src='images/revert_all_24x24.jpg'/> - Revert the recommended skills for the card of all types.</li>
+        </ul>
+        The data will be saved in a local storage, which can be cleared in Options.
+        </p>
+        <p>
+        The <img src='images/comparison_24x24.jpg'/> button is used to add the card of the selected type with
+        the selected skills to comparison.
+        </p>
+        <h3>Options</h3>
+        <dl>
+            <dt>Ignore QS (Self)</dt>
+            <dd>Do not count the damage caused by QS.</dd>
+            <dt>Ignore Sap (Opponent)</dt>
+            <dd>Ignore the effect of Sap casted by the opponent.</dd>
+            <dt>Ignore Non-Recommended Buff/Debuff (Opponent)</dt>
+            <dd>For the opponents, only consider buff/debuff skills in their recommended skill set.</dd>
+            <dt>Plus Normal Attack (Self)</dt>
+            <dd>
+                Add the damage by one Normal Attack after LS.
+                This option is ignored in One Shot By mode or when the card does not have LS.
+            </dd>
+            <dt>Compute One Shot By</dt>
+            <dd>
+                Compute cards that can one shot this card. 
+                By default, we compute cards that cannot be one shot by this card.
+            </dd>
+            <dt>Merge Results of One Shot By</dt>
+            <dd>Merge the results of one shot by.</dd>
+        </dl>
+        <h3>Skills</h3>
+        <p>
+        Below is a table of skills. Note that LS and SD need all the remaning MP (not 0).
+        </p>
+        <p id="faq_skills_table">
+        </p>
+    </div>
+    <div id="faq_stats" title="Stats">
+      <ul>
+        <li>Max Level Stats = Initial Values * 2.5</li>
+        <li>
+          Stones Needed = 
+          <ul>
+            <li>Initial Values * 0.5 (Normal Types)</li>
+            <li>Initial Values * 0.6 (Rebirth Types, 5 Stars)</li>
+            <li>Initial Values * 0.55 (Rebirth Types, 4 Stars)</li>
+          </ul>
+        </li>
+        <li>Max Card Stats = Max Level Stats + Stones Needed</li>
+      </ul>
+    </div>
+</div>
+
+
+
+<nav id="top_menu">
+<ul>
+    <li><a id='nav_what_is_new' href='javascript:WhatIsNew.show("selected-guardian")'>What's New</a> |</li>
+    <li><a id='nav_damage_calculator' href='index.html' class='langdep'>Calculator</a> |</li>
+    <li><a id='nav_cards' href='cards.html' class='langdep'>Cards</a> |</li>
+    <li><a id='nav_excards' href='excards.html' class='langdep'>ExCards</a> |</li>
+    <li><a id='nav_battle_simulator' href='battle.html' class='langdep'>Simulator</a> |</li>
+    <li><a id='nav_battle_simulator2' href='battle2.html' class='langdep'>Simulator II</a> |</li>
+    <li><a id='nav_comparison' href='comparison.html' class='langdep'>Comparison (<span id='comparison_number'>0</span>)</a> |</li>
+    <li><a id='nav_favorites' href='favorites.html' class='langdep'>Favorites</a> |</li>
+    <li><a id='nav_options' href='options.html' class='langdep'>Options</a> ||</li>
+    <li><a id='nav_english' href="index.html" title="English">English</a> |</li>
+    <li><a id='nav_japanese' href="index.html?lang=jp" title="Japanese">Japanese</a> |</li>
+    <li><a id='nav_android' href="http://gccand.web.fc2.com/" target="_blank">Android</a>
+      (by <a href="http://guardiancross-forum.com/User-ikubbq" target="_blank">ikubbq@GCF</a>) |</li>
+    <li><a id='nav_android' href="http://gcandcards.web.fc2.com" target="_blank">Android</a>
+      (by <a href="http://gc-forums.com/member995.html" target="_blank">Purplemandown</a>)</li>
+</ul>
+</nav>
+
+<div id="guardian-list">
+</div>
+
+<div id="selected-guardian">
+</div>
+
+<div id="footnote">
+<hr/>
+<nav id="bottom_menu">
+<ul>
+    <li><a id='nav_m_cards' href='m_cards.html' class='langdep'>Mobile Version</a> |</li>
+    <li><a id='nav_faq' href='faq.html' class='langdep'>FAQ</a> |</li>
+    <li><a href='javascript:showAcknowledgements()'>Acknowledgements</a> |</li>
+    <li><a href='javascript:showHelpsNeeded()'>Helps Needed</a> |</li>
+    <li><a href='javascript:showRelatedLinks()'>Related Links</a> |</li>
+    <li><a id='nav_feedbacks' href="http://gccards.bbs.fc2.com/" target="_blank">Feedback</a> |</li>
+    <li><a href='https://copy.com/RkFxovuO2hOn' target="_blank">Download</a></li>
+</ul>
+</nav>
+<div>
+    Developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>
+</div>
+<div>
+  All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/">Square Enix</a> Co., Ltd.
+</div>
+<div>
+  Use of this website is at your own risk.
+  No warranty is provided.
+</div>
+<div>
+  Best viewed in <a href="http://www.apple.com/safari/" target="_blank">Safari</a>.
+</div>
+</div>
+
+</body>
+
+</html>

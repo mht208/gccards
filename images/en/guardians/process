@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ "${1}" != "" ]]; then
+  sips -s format jpeg card${1}.png --out card${1}.jpg
+  convert -resize 50% card${1}.jpg card${1}.jpg
+fi

@@ -1,0 +1,745 @@
+
+/* General */
+
+img {
+    border-width: 0px;
+}
+
+.light {
+  color: #CCCCCC;
+}
+
+.tips {
+  color: #FF2222;
+}
+
+.warning {
+    color: #FF0000 !important;
+}
+
+.justify {
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.title a, .title a:link, .title a:visited {
+    text-decoration: none;
+    color: #000000;
+}
+
+#footnote {
+    position: relative;
+    padding-top: 20px;
+    text-align: center;
+    clear: both;
+}
+
+.extra-large-font {
+    font-size: 36px !important;
+}
+
+.large-font {
+    font-size: 24px !important;
+}
+
+.normal-font {
+    font-size: 16px !important;
+}
+
+.small-font {
+    font-size: 14px !important;
+}
+
+.tiny-font {
+    font-size: 12px !important;
+}
+
+.qmark {
+    float: right;
+}
+
+a.gclnk, a.gclnk:link, a.gclnk:visited {
+    color: #2266CC;
+    text-decoration: none;
+}
+
+a.skill-link, a.skill-link:link, a.skill-link:visited {
+    color: #333333;
+    text-decoration: none;
+}
+
+.excard-red {
+    text-shadow: 1px 1px 3px #FF8888;
+}
+
+.excard-blue {
+    text-shadow: 1px 1px 3px #8888FF;
+}
+
+/* Attributes table. */
+
+table.attributes {
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+
+table.attributes th {
+    border: 1px solid black;
+}
+
+table.attributes td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+/* Skills table. */
+
+table.skills {
+    border: 1px solid black;
+    border-collapse:collapse;
+}
+
+table.skills th {
+    border: 1px solid black;
+}
+
+table.skills td {
+    border: 1px solid black;
+    text-align: right;
+    padding: 5px 10px 5px 10px;
+}
+
+/* Guardians table. */
+
+table.guardians {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 2048px;
+    table-layout:fixed;
+}
+
+table.guardians th {
+    border: 1px solid black;
+}
+
+table.guardians td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+}
+
+/* Guardian information. */
+
+#guardian-list {
+    float: left;
+    width: 200px;
+}
+
+#tab-list {
+    font-size: 10px !important;
+    list-style-type: none !important;
+}
+
+#guardian-list .header {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    margin: 10px 0px 10px 0px;
+}
+
+#guardian-list div ul {
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px 0px 0px 5px;
+}
+
+#guardian-list div ul li {
+    font-size: 11px;
+    list-style-type: disc;
+    padding: 1px 0px 1px 0px;
+}
+
+#guardian-list div ul li a:first-child { 
+    display: inline-block;
+    vertical-align: top;
+}
+
+#guardian-list div ul li a, #guardian-list div ul li a:link, #guardian-list div ul li a:visited {
+    text-decoration: none;
+    width: 130px;
+}
+
+#guardian-list div ul li a:hover {
+    background: #E1F0FF;
+}
+
+nav {
+    margin-bottom: 5px;
+}
+
+nav a, nav a:link, nav a:visited {
+    text-decoration: none;
+    color: #778899;
+    padding: 5px;
+}
+
+nav a:hover {
+    background: #E1F0FF;
+}
+
+nav ul {
+    padding-left: 5px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+#whatisnew {
+    padding: 10px 0px 0px 30px;
+    width: 800px;
+    font-size: 14px;
+}
+
+#whatisnew dt {
+    font-weight: bold;
+}
+
+#acknowledgement {
+    padding: 10px 0px 0px 30px;
+    width: 800px;
+}
+
+#helpsneeded {
+    padding: 10px 0px 0px 30px;
+    width: 800px;
+}
+
+#selected-guardian {
+    margin-left: 200px;
+}
+
+#top {
+    margin: 0px 0px 0px 0px;
+    width: 1100px;
+    height: 340px;
+}
+
+#info {
+    margin: 0px 0px 0px 255px;
+}
+
+#top100 {
+    padding: 0px 0px 0px 30px;
+}
+
+#top100 a, #top100 a:link, #top100 a:visited {
+    text-decoration: none;
+    color: #2266CC;
+}
+
+#top100 table {
+    border: 1px solid;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#top100 td {
+    border: 1px solid;
+    padding: 0px 5px 0px 5px;
+}
+
+#basic_selector table {
+}
+
+#basic_selector table tr td, #basic_selector table tr th {
+    padding: 5px 5px 5px 5px;
+    vertical-align: top;
+}
+
+#wrapper {
+    margin: 0px 0px 0px 0px;
+    width: 1000px;
+}
+
+#wrapper .header {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+    margin: 10px 0px 5px 0px;
+    background: #88AAAA;
+    color: white;
+}
+
+#wrapper .subheader {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 5px 3px 5px;
+    margin: 5px 0px 3px 0px;
+/*    background: #88AAAA;
+    color: white; */
+}
+
+#left {
+    font-size: 14px;
+    float: left;
+    position: absolute;
+    top: 378px;
+    left: 10px;
+    width: 280px;
+    height: 700px;
+}
+
+#left.with-menu {
+    left: 230px !important;
+}
+
+#center {
+    float: left;
+    width: 560px;
+    margin-left: 310px;
+    margin-top: 0px;
+    min-height: 800px;
+}
+
+#right {
+    font-size: 14px;
+    float: left;
+    position: absolute;
+    top: 378px;
+    margin-left: 10px;
+    width: 290px;
+    height: 700px;
+}
+
+#right.with-menu {
+    left: 960px;
+}
+
+div.card {
+    position: relative;
+    float: left;
+    margin-left: 10px;
+}
+
+div.card img {
+    width: 215px;
+}
+
+#stars {
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 13px;
+    margin-bottom: 10px;
+    width: 600px;
+    min-height: 10px;
+}
+
+#spawn {
+    position: absolute;
+    top: 165px;
+    margin: 0px 0px 0px 0px;
+}
+
+#shape {
+    margin-right: 10px;
+}
+
+#place {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#event {
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+#current-type {
+    font-size: 36px;
+    color: #999999;
+    font-weight: bold;
+    text-shadow: 3px 3px #EEEEEE;
+}
+
+div.types {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#types {
+    position: absolute;
+    top: 202px;
+    font-size: 13px;
+    background: #CCCCCC;
+    width: 600px;
+    height: 15px;
+    margin-left: 0px;
+}
+
+#rbtypes {
+    position: absolute;
+    top: 227px;
+    font-size: 13px;
+    background: #EE6666;
+    width: 600px;
+    height: 15px;
+    margin-left: 20px;
+}
+
+#heterogeneous_rbtypes {
+    position: absolute;
+    top: 227px;
+    font-size: 13px;
+    background: #6666EE;
+    width: 600px;
+    height: 15px;
+    margin-left: 40px;
+}
+
+#types a, #types a:link, #types a:visited {
+    text-decoration: none;
+}
+
+#rbtypes a, #rbtypes a:link, #rbtypes a:visited {
+    text-decoration: none;
+}
+
+#heterogeneous_rbtypes a, #heterogeneous_rbtypes a:link, #heterogeneous_rbtypes a:visited {
+    text-decoration: none;
+}
+
+div.types span.type {
+    padding-left: 20px;
+    color: #FFFFFF;
+}
+
+div.types span.disabled {
+    padding-left: 20px;
+    color: #999999;
+}
+
+div.types span.selected {
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+table.stats {
+    position: absolute;
+    font-size: 14px;
+    border: 1px solid black;
+    border-collapse:collapse;    
+    margin: 10px 0px 10px 0px;
+    width: 600px;
+    top: 245px;
+}
+
+table.stats th {
+    border: 1px solid black;
+}
+
+table.stats td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 2px 10px 2px 10px;
+}
+
+table.stats th.descriptions {
+    width: 160px;
+}
+
+table.stats th.values {
+    width: 70px;
+}
+
+.entry {
+    margin-top: 2px;
+}
+
+#left .selector {
+    font-size: 12px !important;
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 1;
+    border: 1px solid;
+    border-radius: 0;
+    height: 25px;
+}
+
+#left .selector2 {
+    font-size: 12px !important;
+    width: 85%;
+    margin-left: 5px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    line-height: 1;
+    border: 1px solid;
+    border-radius: 0;
+    height: 25px;
+}
+
+#left button {
+    width: 100px;
+    height: 26px;
+    margin-top: 10px;
+}
+
+span.skill-header {
+    width: 20px;
+    margin-right: 10px;
+    padding: 2px 0px 2px 5px;
+    display: inline-block;
+    background: #EEEEEE;
+}
+
+span.attribute-header {
+    width: 75px;
+    margin-right: 10px;
+    padding: 2px 0px 2px 5px;
+    display: inline-block;
+    background: #EEEEEE;
+}
+
+span.guardian-name {
+    width: 240px;
+    display: inline-block;
+    padding: 2px 0px 2px 5px;
+    margin-right: 5px;
+    background: #EEEEEE;
+}
+
+span.tiny-guardian-name {
+    width: 150px;
+    display: inline-block;
+    padding: 2px 0px 2px 5px;
+    margin-right: 5px;
+    background: #EEEEEE;
+}
+
+#typenames {
+    border-collapse:collapse;
+}
+
+#typenames th {
+}
+
+#typenames td {
+    text-align: right;
+    padding: 2px 5px 2px 5px;
+}
+
+.question {
+    font-weight: bold;
+    font-size: 26px;
+    margin: 30px 0px 5px 0px;
+}
+
+.answer {
+    line-height: 20px;
+}
+
+/* Cards List. */
+
+#filters {
+    float: left;
+    width: 280px;
+}
+
+#filters .header {
+    font-size: 14px;
+}
+
+#custom_selector .header {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 20px 0px 5px 0px;
+}
+
+#custom_selector p {
+    font-size: 11px;
+    margin: 0px 0px 0px -30px;
+}
+
+#filters div ul {
+    font-size: 11px;
+    padding: 0px;
+    margin: 0px 0px 0px -10px;
+}
+
+#filters div ul li {
+    list-style-type: disc;
+    padding: 2px 0px 2px 0px;
+}
+
+#filters div ul li a:first-child { 
+    display: inline-block;
+    vertical-align: top;
+}
+
+#filters div ul li a, #filters div ul li a:link, #filters div ul li a:visited {
+    text-decoration: none;
+    width: 200px;
+}
+
+#filters div ul li a:hover {
+    background: #E1F0FF;
+}
+
+#cardtable {
+    margin-left: 290px;
+}
+
+/* Card Evaluation */
+
+.ace-type {
+    color: #FFAC30 !important;
+    text-shadow: 1px 1px 10px #FFC875 !important;
+}
+
+.good-type10 {
+    color: #007A29 !important;
+    text-shadow: 1px 1px 10px #33AD5C !important;
+}
+
+.good-type9 {
+    color: #33AD5C !important;
+    text-shadow: 1px 1px 10px #66C285 !important;
+}
+
+.good-type8 {
+    color: #66C285 !important;
+    text-shadow: 1px 1px 10px #99D6AD !important;
+}
+
+.good-type7 {
+    color: #99D6AD !important;
+    text-shadow: 1px 1px 10px #CCEBD6 !important;
+}
+
+.decent-type7 {
+    color: #0066FF !important;
+    text-shadow: 1px 1px 10px #4D94FF !important;
+}
+
+.decent-type6 {
+    color: #4D94FF !important;
+    text-shadow: 1px 1px 10px #99C2FF !important;
+}
+
+.decent-type5 {
+    color: #99C2FF !important;
+    text-shadow: 1px 1px 10px #CCE0FF !important;
+}
+
+.decent-type4 {
+    color: #CCE0FF !important;
+    text-shadow: 1px 1px 10px #E6F0FF !important;
+}
+
+.bad-type3 {
+    color: #FF8080 !important;
+    text-shadow: 1px 1px 10px #FFA0A0 !important;
+}
+
+.bad-type2 {
+    color: #FF4D4D !important;
+    text-shadow: 1px 1px 10px #FF8080 !important;
+}
+
+.bad-type1 {
+    color: #FF0000 !important;
+    text-shadow: 1px 1px 10px #FF4D4D !important;
+}
+
+#faq {
+    width: 800px;
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+
+.stars5 {
+    color: #FF5C85;
+    text-shadow: 0px 1px 2px #AAAAAA, 1px 0px 2px #AAAAAA, 0px -1px 2px #AAAAAA, -1px 0px 2px #AAAAAA;
+    letter-spacing: 3px;
+}
+
+.stars4 {
+    color: #FFF70F;
+    text-shadow: 0px 1px 2px #AAAAAA, 1px 0px 2px #AAAAAA, 0px -1px 2px #AAAAAA, -1px 0px 2px #AAAAAA;
+    letter-spacing: 3px;
+}
+
+.stars3 {
+    color: #85FF85;
+    text-shadow: 0px 1px 2px #AAAAAA, 1px 0px 2px #AAAAAA, 0px -1px 2px #AAAAAA, -1px 0px 2px #AAAAAA;
+    letter-spacing: 3px;
+}
+
+.stars2 {
+    color: #85D6FF;
+    text-shadow: 0px 1px 2px #AAAAAA, 1px 0px 2px #AAAAAA, 0px -1px 2px #AAAAAA, -1px 0px 2px #AAAAAA;
+    letter-spacing: 3px;
+}
+
+.stars1 {
+    color: #C2C2C2;
+    letter-spacing: 3px;
+}
+
+.event_card {
+    text-shadow: 1px 1px 5px #999999;
+}
+
+#comparison_table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#comparison_table tr th {
+    border: 1px solid black;
+    vertical-align: top;
+    padding: 5px 5px 5px 5px;
+}
+
+#comparison_table tr td {
+    border: 1px solid black;
+    text-align: center;
+    width: 360px;
+    padding: 2px 2px 2px 2px;
+}
+
+#comparison_table tr td.left-align {
+    text-align: left !important;
+}
+
+#comparison_table tr td.top-align {
+    vertical-align: top !important;
+}
+
+.shorttype {
+    padding-left: 1px;
+}
+
+#top_menu {
+    width: 1280px;
+    font-size: 14px;
+}
+
+#footnote {
+    width: 1280px;
+    font-size: 14px;
+}
+
+.expand-icon {
+    margin-right: 10px;
+}

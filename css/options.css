@@ -1,0 +1,20 @@
+#options {
+    width: 600px;
+    margin-left: 10px;
+}
+
+#options-evaluation ul {
+    list-style-type: none;
+    list-style-position: outside;
+    margin-left: 0px;
+    padding-left: 1em;
+}
+
+#options-buttons {
+    padding-top: 20px;
+}
+
+#options-message {
+    margin-left: 50px;
+    width: 200px;
+}

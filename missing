@@ -1,0 +1,28 @@
+#!/bin/bash
+
+IMPORT=import
+VER=$1
+IMAGE_HOME=images/${VER}
+
+function check {
+    src=${IMPORT}/${VER}
+    dst=${IMAGE_HOME}/${dir}
+    for file in `ls ${src}/${prefix}?????.png`; do
+        fn=`basename ${file}`
+        if [ ! -f ${dst}/${fn} ]; then
+            echo "Copying ${file}"
+            cp ${file} ${IMPORT}/
+        fi
+    done
+}
+
+if [[ "${VER}" == "" ]]; then
+  echo "./missing VER"
+else
+  pairs="battle|battle_ guardians|card avatars|card_thu"
+  for p in ${pairs}; do
+      dir=`echo "${p}" | cut -d '|' -f 1`
+      prefix=`echo "${p}" | cut -d '|' -f 2`
+      check
+  done
+fi

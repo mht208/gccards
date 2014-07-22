@@ -1,0 +1,80 @@
+.ui-tabs .ui-tabs-nav li a {
+  font-size: 12px !important;
+}
+
+.ui-button-text-only .ui-button-text {
+  font-size: 12px !important;
+}
+
+#fav-wrapper {
+  width: 1100px;
+}
+
+#fav-card-buttons {
+  padding-bottom: 10px;
+}
+
+#fav-excard-buttons {
+  padding-bottom: 10px;
+}
+
+.fav-card-list table {
+  font-size: 14px;
+  border-collapse:collapse;
+  border: 1px solid;
+  width: 1000px;
+}
+
+.fav-card-list table th, .fav-card-list table td {
+  border: 1px solid;
+  text-align: center;
+  padding: 2px 5px 2px 5px;
+}
+
+#fav-new-card-dialog {
+  display: none;
+}
+
+#fav-new-excard-dialog {
+  display: none;
+}
+
+.fav-card-selection {
+  float: left;
+  width: 400px;
+}
+
+.fav-card-selection table {
+  width: 600px;
+}
+
+.fav-card-selection table th {
+  width: 100px;
+}
+
+.fav-card-selection select {
+  width: 400px;
+}
+
+.fav-card-selection-image {
+  position: relative;
+  float: right;
+  top: 0px;
+  width: 200px;
+}
+
+#fav-new-card-buttons {
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 600px;
+}
+
+#fav-new-excard-buttons {
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 600px;
+}
+
+#fav-import-buttons {
+  margin-top: 10px;
+}

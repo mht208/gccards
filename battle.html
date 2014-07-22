@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Guardian Cross - Battle Simulator</title>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="css/gc.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/loader.min.js"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40784747-1', 'fc2.com');
+  ga('send', 'pageview');
+
+</script>
+<link href="css/ui-lightness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #battle-top {
+        width: 1000px;
+    }
+    
+    #battle-center {
+        width: 1400px;
+        height: 1000px;
+    }
+    
+    #battle-left-line {
+        float: left;
+        margin: 10px 0px 0px 10px;
+        width: 370px;
+        height: 1200px;
+    }
+
+    #battle-info {
+    }
+    
+    #battle-my-image {
+        float: left;
+        position:absolute;
+        top: 60px;
+        left: 410px;
+        width: 220px;
+    }
+    
+    #battle-my-hp {
+        float: left;
+        position:absolute;
+        top: 370px;
+        left: 410px;
+        width: 200px;
+        height: 10px;
+    }
+    
+    #battle-my-mp {
+        float: left;
+        position:absolute;
+        top: 385px;
+        left: 410px;
+        width: 200px;
+        height: 10px;
+    }
+
+    #battle-oppo-image {
+        float: left;
+        position: absolute;
+        top: 60px;
+        left: 680px;
+        width: 220px;
+    }
+
+    #battle-oppo-hp {
+        float: left;
+        position: absolute;
+        top: 370px;
+        left: 680px;
+        width: 200px;
+        height: 10px;
+    }
+
+    #battle-oppo-mp {
+        float: left;
+        position: absolute;
+        top: 385px;
+        left: 680px;
+        width: 200px;
+        height: 10px;
+    }
+    
+    #battle-messages {
+        float: left;
+        margin: 360px 0px 0px 10px;
+    }
+
+    #battle-right-line {
+        float: left;
+        width: 400px;
+        margin: 10px 0px 0px 50px;
+    }
+
+    .battle-line-arrows {
+        display: inline-block;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .battle-line-header {
+        font-size: 14px;
+        width: 10px;
+        display: inline-block;
+        text-align: right;
+        margin: 0px 0px 0px 0px;
+    }
+    
+    .battle-line-stars {
+        width: 60px;
+        margin: 0px 10px 5px 10px;
+    }
+    
+    .battle-line-guardian {
+        width: 250px;
+        margin: 0px 10px 0px 0px;
+    }
+
+    .battle-line-type {
+        width: 130px;
+        margin: 0px 0px 10px 10px;
+    }
+
+    .battle-line-level {
+        width: 50px;
+        margin: 10px 0px 0px 10px;
+    }
+
+    .battle-line-stoned {
+        width: 80px;
+        margin: 10px 0px 0px 10px;
+    }
+
+    .battle-line-skill {
+        width: 280px;
+        margin: 0px 10px 10px 58px;
+    }
+    
+    .battle-line-status {
+        margin: 0px 0px 10px 58px;
+        height: 30px;
+    }
+    
+    #message {
+        font-size: 14px;
+    }
+    
+    .ability-table {
+        text-align: right;
+    }
+
+    .ability-table tr td {
+        padding: 2px 10px 2px 10px;
+    }
+
+    .option-table {
+        text-align: right;
+    }
+
+    .option-table tr td {
+        padding: 2px 10px 2px 10px;
+    }
+    
+    #my_team_avatars {
+        margin-left: 250px;
+    }
+
+    img.avatar {
+        width: 128px;
+        height: 28px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    img.defeated {
+        filter: opacity(0.5) blur(2px);
+        -webkit-filter: opacity(0.5) blur(2px);
+        -moz-filter: opacity(0.5) blur(2px);
+        -o-filter: opacity(0.5) blur(2px);
+        -ms-filter: opacity(0.5) blur(2px);
+/* Google Chrome and Mozilla Firefox do not handle brightness correctly. */
+/*
+        filter: brightness(-0.2) blur(2px);
+        -webkit-filter: brightness(-0.2) blur(2px);
+        -moz-filter: brightness(-0.2) blur(2px);
+        -o-filter: brightness(-0.2) blur(2px);
+        -ms-filter: brightness(-0.2) blur(2px);
+*/
+    }
+
+    progress {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        border: none;
+        width: 200px;
+        height: 10px;
+    }
+
+    proggress::-webkit-progress-bar {
+        background: #EEEEEE;
+    }
+
+    /* Background image is not supported by Chrome. */
+    progress.hp::-webkit-progress-value {
+        background: #33FF33 url('images/battle/battle_hp.png');
+    }
+  
+    /* Background image is not supported by Chrome. */
+    progress.mp::-webkit-progress-value {
+        background: #3333FF url('images/battle/battle_mp.png');
+    }
+
+    /* -moz-progress-bar is for the value and background image is not supported in Firefox. */
+    progress.hp::-moz-progress-bar {
+        background: #33FF33 url('images/battle/battle_mp.png');
+    }
+
+    /* -moz-progress-bar is for the value and background image is not supported in Firefox. */
+    progress.mp::-moz-progress-bar {
+        background: #3333FF url('images/battle/battle_mp.png');
+    }
+</style>
+<script lang="text/javascript">
+var COOKIE_DELAY = "battle.delay";
+var COOKIE_METER = "battle.meter";
+var COOKIE_SD = "battle.sd";
+var COOKIE_LS = "battle.ls";
+var COOKIE_REVIVAL = "battle.revival";
+var COOKIE_DS = "battle.ds";
+var COOKIE_SAP = "battle.sap";
+var COOKIE_SMASH = "battle.smash";
+var COOKIE_ANIMATION = "battle.animation";
+var COOKIE_BATTLE_MESSAGE = "battle.message";
+var COOKIE_AGIBUFF = "battle.agibuff";
+var COOKIE_QS_RESET = "battle.qs.reset";
+
+var targets = new Array(
+    {id: "#my_team", prefix: "my_", title: "My Party"}, 
+    {id: "#oppo_team", prefix: "oppo_", title: "Opponent's Party"}
+);
+
+var messages = new Array();
+var TEAM_SIZE = 10;
+var STAR_SIZE = 5;
+var SKILL_SIZE = 3;
+var SKILL_NONE = -1;
+var MAX_LEVEL = 70;
+var ANIMATION_DURATION = 500;
+var SLIDE_DISTANCE = 100;
+var QS_RESET_NONE = 0;
+var QS_RESET_PREVIOUS = 1;
+var QS_RESET_ZERO = 2;
+var options = {
+    delay: parseFloat(getCookie(COOKIE_DELAY, 400)),
+    meter: parseFloat(getCookie(COOKIE_METER, 10000)),
+    sd: parseFloat(getCookie(COOKIE_SD, 0.2)),
+    ls: parseFloat(getCookie(COOKIE_LS, 0.8)),
+    revival: parseFloat(getCookie(COOKIE_REVIVAL, 0.2)),
+    ds: parseFloat(getCookie(COOKIE_DS, 0.6)),
+    sap: parseFloat(getCookie(COOKIE_SAP, 0.6)),
+    smash: parseFloat(getCookie(COOKIE_SMASH, 0.6)),
+    animation: getCookie(COOKIE_ANIMATION, true),
+    battle_message: getCookie(COOKIE_BATTLE_MESSAGE, "true") == "true",
+    agibuff: parseInt(getCookie(COOKIE_AGIBUFF, 0)),
+    qs_reset: parseInt(getCookie(COOKIE_QS_RESET, QS_RESET_ZERO))
+};
+
+var MSG_BUFF = 1;
+var MSG_ATTACK = 2;
+var MSG_DAMAGE = 3;
+var MSG_QS = 4;
+var MSG_LS = 5;
+var MSG_SD = 6;
+var MSG_DS = 7;
+var MSG_EP = 8;
+var MSG_SAP = 9;
+var MSG_REVIVAL = 10;
+var MSG_DEFEATED = 11;
+var MSG_OTHER = 999;
+
+function clearMessage() {
+    $("#message").val("");
+}
+
+function outputMessage(m) {
+    $("#message")
+        .val($("#message").val() + m + "\n")
+        .scrollTop($("#message")[0].scrollHeight);
+}
+
+/**
+ * Inserts a message for an action.
+ * g1: the action performer
+ * g2: the target of the action
+ * m: the message
+ * opts: options
+ */
+function msg(g1, g2, m, opts) {
+    if (!options.battle_message)
+        return;
+
+    /* Swap g1 and g2 sucht that g1 is always in my party and g2 in the opponent's party. */
+    if (opts.rev) {
+        var tmp = g1;
+        g1 = g2;
+        g2 = tmp;
+    }
+
+    /* Check if this is the first appearance of the cards in the battle. */
+    var first1 = typeof g1.battle.first == 'undefined' || g1.battle.first == true;
+    var first2 = typeof g2.battle.first == 'undefined' || g2.battle.first == true;
+    if (first1)
+        g1.battle.first = false;
+    if (first2)
+        g2.battle.first = false;
+
+    /* Clone the cards such that the status at this time can be saved. */
+    g1 = clone(g1);
+    g1.battle = clone(g1.battle);
+    g1.battle.first = first1;
+    g1.battle.status = clone(g1.battle.status);
+    g2 = clone(g2);
+    g2.battle = clone(g2.battle);
+    g2.battle.first = first2;
+    g2.battle.status = clone(g2.battle.status);
+    
+    /* Insert the message. */
+    messages.push({g1: g1, g2: g2, m: m, t: opts.type, a: opts.rev ? g2 : g1, d: opts.rev ? g1 : g2});
+}
+
+var helper = {
+    gIndex: function(e) {
+        return $(e).parent().data("index");
+    },
+    gPrefix: function(e) {
+        return $(e).parent().data("prefix");
+    },
+    gType: function(e) {
+        return Type.get($(e).parent().find(".battle-line-type").val());
+    },
+    gGuardian: function(e) {
+        var gid = $(e).parent().find(".battle-line-guardian").val();
+        var g = Card.get(gid);
+        var type = Type.get($(e).parent().find(".battle-line-type").val());
+        var level = parseInt($(e).parent().find(".battle-line-level").val());
+        g.setType(type);
+        g.setLevel(level);
+        return g;
+    },
+    gStatus: function(e) {
+        var g = this.gGuardian(e);
+        var status = g.getStatus();
+        var stoned = $(e).parent().find(".battle-line-stoned");
+        if ($(stoned).val() == "custom") {
+            status.hp = $(stoned).data("hp") > 0 ? $(stoned).data("hp") : status.hp;
+            status.mp = $(stoned).data("mp") > 0 ? $(stoned).data("mp") : status.mp;
+            status.atk = $(stoned).data("atk") > 0 ? $(stoned).data("atk") : status.atk;
+            status.def = $(stoned).data("def") > 0 ? $(stoned).data("def") : status.def;
+            status.agi = $(stoned).data("agi") > 0 ? $(stoned).data("agi") : status.agi;
+            status.wis = $(stoned).data("wis") > 0 ? $(stoned).data("wis") : status.wis;
+        } else if ($(stoned).val() == "fsemp" || $(stoned).val() == "fs") {
+            status.hp += g.getStoneHP();
+            status.atk += g.getStoneATK();
+            status.def += g.getStoneDEF();
+            status.agi += g.getStoneAGI();
+            status.wis += g.getStoneWIS();
+            if ($(stoned).val() == "fs")
+                status.mp += g.getStoneMP();
+        }
+        return status;
+    },
+    uStatus: function(e) {
+        var s = this.gStatus(e);
+        $(e).parent()
+            .find(".battle-line-status")
+            .html(s.hp + " / " + s.mp + " / " + s.atk + " / " + s.def + " / " + s.agi + " / " + s.wis);
+    },
+    uType: function(e, g) {
+        g.setType(getBestBattleType(g));
+        $(e).parent()
+            .find(".battle-line-type")
+            .val(g.getType().id);
+    },
+    uLevel: function(e, g) {
+        $(e).parent()
+            .find(".battle-line-level")
+            .val(g.getMaxLevel());
+    }
+};
+
+function insertStars(prefix, index) {
+    var id = "#" + prefix + "stars" + index;
+    $(id)
+        .html("")
+        .change(function() {
+            var stars = parseInt($(this).find("option:selected").val());
+            var index = helper.gIndex($(this));
+            if (stars == 0) {
+                $("#" + prefix + "guardian" + index).html("");
+                $("#" + prefix + "type" + index).html("");
+                $("#" + prefix + "level" + index).html("");
+                $("#" + prefix + "stoned" + index).html("");
+                $("#" + prefix + "status" + index).html("");
+                for (var i = 0; i < SKILL_SIZE; i++) {
+                    $("#" + prefix + "skill" + index + "_" + i).html("");
+                }
+            } else
+                insertGuardians(prefix, index, stars);
+        });
+    for (var i = 0; i < STAR_SIZE + 1; i++) {
+        $(id).append(
+            $("<option value='" + i + "'>" + (i == 0 ? "None" : i) + "</option>")
+                .attr("selected", i == 0)
+        );
+    }
+}
+
+function insertGuardians(prefix, index, stars) {
+    for (var i = 0; i < SKILL_SIZE; i++)
+        $("#" + prefix + "skill" + index + "_" + i).html("");
+
+    var id = "#" + prefix + "guardian" + index;
+    var gs = Selector.select(Selector.stars(stars));
+    gs.sort(Sorting.border);
+    $(id).html("");
+    for (var i = 0; i < gs.length; i++) {
+        var g = gs[i];
+        var en = goptions.isTranslationNeeded() && g.id in ename.guardians ? " (" + ename.guardians[g.id] + ")" : "";
+        $(id).append(
+            $("<option value='" + g.id + "'>" + g.name + en + "</option>")
+            .attr("selected", i == 0)
+        );
+    }
+    $(id).change(function() {
+        var index = helper.gIndex($(this));
+        var g = helper.gGuardian($(this));
+        insertSkills(prefix, index, g);
+        helper.uStatus($(this));
+        helper.uType($(this), g);
+        helper.uLevel($(this), g);
+    });
+    
+    insertTypes(prefix, index, gs[0]);
+    insertLevels(prefix, index, gs[0]);
+    insertStoned(prefix, index);
+    
+    $(id).change();
+}
+
+function getBestBattleType(g) {
+    var ts = new Array(Type.acer, Type.coolr, Type.ace, Type.cool);
+    for (var i = 0; i < ts.length; i++) {
+        if (g.hasType(ts[i]))
+            return ts[i];
+    }
+    return null;
+}
+
+function insertTypes(prefix, index, g) {
+    var id = "#" + prefix + "type" + index;
+    $(id)
+        .html("")
+        .change(function() {
+            helper.uStatus($(this));
+        });
+    for (var i = 0; i < Type.all.length; i++) {
+        var t = Type.all[i];
+
+        var suffix = t.isRebirthType() ? " (Rebirth)" : "";
+        $(id).append(
+            $("<option value='" + t.id + "'>" + t.name + suffix + "</option>")
+                .attr("selected", false)
+        );
+    }
+
+    g.setType(getBestBattleType(g));
+    $(id).val(g.getType().id);
+}
+
+function insertLevels(prefix, index, g) {
+    var id = "#" + prefix + "level" + index;
+    $(id)
+        .html("")
+        .change(function() {
+            helper.uStatus($(this));
+        });
+    var type = helper.gType($(id));
+
+    g.setType(type);
+    for (var i = 0; i < MAX_LEVEL; i++) {
+        $(id).append(
+            $("<option value='" + (i + 1) + "'>" + (i + 1) + "</option>")
+                .attr("selected", false)
+        );
+    }
+    
+    $(id).val(g.getMaxLevel());
+}
+
+function insertStoned(prefix, index) {
+    $("#" + prefix + "stoned" + index)
+        .html("")
+        .append("<option value='clean'>Clean</option>")
+        .append("<option value='fsemp'>FSeMP</option>")
+        .append("<option value='fs' selected>FS</option>")
+        .append("<option value='custom'>Custom</option>")
+        .click(function() {
+            if ($(this).val() != "custom") {
+                helper.uStatus($(this));
+                return;
+            }
+
+            var me = $(this);
+            var index = helper.gIndex($(this));
+            var g = helper.gGuardian($(this));
+            var status = helper.gStatus($(this));
+
+            $("#ability-dialog")
+                .hide()
+                .html("<p>Please enter the abilities (with stones) of " + g.name + ".</p>")
+                .append("<table class='ability-table'>" +
+                    "<tr><th>HP</th><td><input type='text' id='ability-hp' value='" + status.hp + "' /></td></tr>" +
+                    "<tr><th>MP</th><td><input type='text' id='ability-mp' value='" + status.mp + "' /></td></tr>" +
+                    "<tr><th>ATK</th><td><input type='text' id='ability-atk' value='" + status.atk + "' /></td></tr>" +
+                    "<tr><th>DEF</th><td><input type='text' id='ability-def' value='" + status.def + "' /></td></tr>" +
+                    "<tr><th>AGI</th><td><input type='text' id='ability-agi' value='" + status.agi + "' /></td></tr>" +
+                    "<tr><th>WIS</th><td><input type='text' id='ability-wis' value='" + status.wis + "' /></td></tr>" +
+                    "</table>"
+                )
+                .dialog({
+                    modal: true, 
+                    title: "Card Abilities",
+                    buttons: [
+                        {text: "Close", click: function() {$(this).dialog("close");}}
+                    ],
+                    autoOpen: false,
+                    position: {my: "center", at: "top", of: window},
+                    width: 600,
+                    close: function(event, ui) {
+                        $("#" + prefix + "stoned" + index)
+                            .data("hp", parseInt($("#ability-hp").val()))
+                            .data("mp", parseInt($("#ability-mp").val()))
+                            .data("atk", parseInt($("#ability-atk").val()))
+                            .data("def", parseInt($("#ability-def").val()))
+                            .data("agi", parseInt($("#ability-agi").val()))
+                            .data("wis", parseInt($("#ability-wis").val()));
+                        $(this).dialog("destroy");
+                        helper.uStatus(me);
+                    }
+                })
+                .dialog("open");
+        })
+        .change(function() {
+            helper.uStatus($(this));
+        })
+        .mouseover(function() {
+            var g = helper.gGuardian($(this));
+            var status = helper.gStatus($(this));
+            $(this).attr("title", 
+                "HP = " + status.hp + ", MP = " + status.mp + 
+                ", ATK = " + status.atk + ", DEF = " + status.def + 
+                ", AGI = " + status.agi + ", WIS = " + status.wis);
+        });
+}
+
+function insertSkills(prefix, index, g) {
+    var type = Type.get($("#" + prefix + "type" + index).val());
+    
+    var gskills = type.isRebirthType() ? g.recommendsrb : g.recommends;
+    var sorted_skills = new Array();
+    sorted_skills.push.apply(sorted_skills, Skill.getLearnableSkills());
+    for (var i = 0; i < g.skills.length; i++) {
+        if (g.skills[i].stone == 0)
+            sorted_skills.push(g.skills[i]);
+    }
+    sorted_skills.sort(Sorting.skill);
+
+    for (var i = 0; i < SKILL_SIZE; i++) {
+        var id = "#" + prefix + "skill" + index + "_" + i;
+        $(id)
+            .html("")
+            .append("<option id='-1'>None</option>");
+        for (var j = 0; j < sorted_skills.length; j++) {
+            var skill = sorted_skills[j];
+            $(id).append(
+                $("<option></option>")
+                    .append($("<span></span>").addClass("skill-name").html(skill.name))
+                    .append($("<span></span>").addClass("skill-description").html(" (" + skill.description + ")"))
+                    .each(function () {
+                        if (i < gskills.length && skill.id == gskills[i].id)
+                            $(this).attr("selected", true);
+                    })
+                    .val(skill.id)
+            );
+            if (j + 1 < sorted_skills.length) {
+                var next = sorted_skills[j + 1];
+                if (skill.stone == 0 && next.stone == 1)
+                    $(id).append("<option>=============================</option>");
+                else if (skill.level == next.level + 1 && skill.attribute != Attribute.death && next.attribute != Attribute.death)
+                    $(id).append("<option>=============================</option>");
+            }
+        }
+    }
+}
+
+function setStars(prefix, index, stars) {
+    var id = "#" + prefix + "stars" + index;
+    $(id).val(stars);
+    $(id).change();
+}
+
+function setGuardian(prefix, index, gid) {
+    var id = "#" + prefix + "guardian" + index;
+    $(id).val(gid);
+    $(id).change();
+}
+
+function setType(prefix, index, tid) {
+    var id = "#" + prefix + "type" + index;
+    $(id).val(tid);
+    $(id).change();
+}
+
+function setLevel(prefix, index, level) {
+    var id = "#" + prefix + "level" + index;
+    $(id).val(level);
+    $(id).change();
+}
+
+function setStoned(prefix, index, stoned) {
+    var id = "#" + prefix + "stoned" + index;
+    $(id).val(stoned.toLowerCase());
+    $(id).change();
+}
+
+function setSkills(prefix, index, sks) {
+    for (var i = 0; i < SKILL_SIZE; i++) {
+        var id = "#" + prefix + "skill" + index + "_" + i;
+        if (i < sks.length)
+            $(id).val(sks[i]);
+        else
+            $(id).val(SKILL_NONE);
+    }
+}
+
+function getSkills(prefix, index) {
+    var res = new Array();
+    for (var i = 0; i < 3; i++) {
+        var id = "#" + prefix + "skill" + index + "_" + i;
+        var sid = $(id).find("option:selected").val();
+        var skill = Skill.get(sid);
+        if (skill != null)
+            res.push(skill);
+    }
+    return res;
+}
+
+function setCustomStatus(prefix, index, status) {
+    $("#" + prefix + "stoned" + index)
+        .data("hp", status.hp)
+        .data("mp", status.mp)
+        .data("atk", status.atk)
+        .data("def", status.def)
+        .data("agi", status.agi)
+        .data("wis", status.wis)
+        .change();
+}
+
+function setImage(target, prefix, g) {
+    var alive = function(e) {
+        $(e)
+            .css("filter", "")
+            .css("-webkit-filter", "")
+            .css("-moz-filter", "")
+            .css("-o-filter", "")
+            .css("-ms-filter", "");
+    };
+
+    if (g.battle.first) {
+        $("#" + prefix + "-image")
+            .html("")
+            .append(g.getImage(200));
+    }
+
+    if (g.battle.status.hp <= 0) {
+        $("#" + prefix + "-image img").addClass("defeated");
+        $(target.id + "_avatars img:nth-of-type(" + (g.battle.line + 1) + ")")
+            .addClass("defeated");
+    }
+
+    var id = prefix + "-hp";
+    $("#" + id)
+        .html("")
+        .append(
+            $("<progress id='" + id + "bar'></progress>")
+                .attr("max", g.battle.status.ohp)
+                .attr("value", g.battle.status.hp)
+                .addClass("hp")
+        );
+    
+    id = prefix + "-mp";
+    $("#" + id)
+        .html("")
+        .append(
+            $("<progress id='" + id + "bar'></progress>")
+                .attr("max", g.battle.status.omp)
+                .attr("value", g.battle.status.mp)
+                .addClass("mp")
+        );
+}
+
+function swap(prefix, i1, i2) {
+    var lines = new Array(
+        {index: i1, element: $("#" + prefix + "line" + i1)}, 
+        {index: i2, element: $("#" + prefix + "line" + i2)}
+    );
+    $(lines[0].element).insertBefore($(lines[1].element).next());
+
+    for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].element;
+        i1 = lines[i].index;
+        i2 = lines[(i + 1) % 2].index;
+        $(line)
+            .attr("id", prefix + "line" + i2)
+            .data("index", i2)
+            .find("span.battle-line-header").html(i2 + 1);
+        $(line).find("#" + prefix + "stars" + i1).attr("id", prefix + "stars" + i2);
+        $(line).find("#" + prefix + "guardian" + i1).attr("id", prefix + "guardian" + i2);
+        $(line).find("#" + prefix + "type" + i1).attr("id", prefix + "type" + i2);
+        $(line).find("#" + prefix + "level" + i1).attr("id", prefix + "level" + i2);
+        $(line).find("#" + prefix + "stoned" + i1).attr("id", prefix + "stoned" + i2);
+        for (var j = 0; j < SKILL_SIZE; j++)
+            $(line).find("#" + prefix + "skill" + i1 + "_" + j).attr("id", prefix + "skill" + i2 + "_" + j);
+        $(line).find("#" + prefix + "status" + i1).attr("id", prefix + "status" + i2);
+    }
+}
+
+function moveUp(prefix, idx) {
+    if (idx == 0)
+        return;
+    swap(prefix, idx - 1, idx);
+}
+
+function moveDown(prefix, idx) {
+    if (idx == TEAM_SIZE - 1)
+        return;
+    swap(prefix, idx, idx + 1);
+}
+
+function getGuardians(target) {
+    var id = target.id;
+    var prefix = target.prefix;
+    var gs = new Array();
+    for (var i = 0; i < TEAM_SIZE; i++) {
+        var gid = $("#" + prefix + "guardian" + i).val();
+        var g = Card.get(gid);
+        if (g == null)
+            continue;
+
+        g = clone(g);
+        var tid = parseInt($("#" + prefix + "type" + i).val());
+        var type = Type.get(tid);
+        if (type == null)
+            continue;
+        g.setType(type);
+        
+        var level = parseInt($("#" + prefix + "level" + i).val());
+        g.setLevel(level);
+        
+        var stoned = $("#" + prefix + "stoned" + i).val();
+        var status = g.getStatus();
+        if (stoned == "custom") {
+            status.hp = $("#" + prefix + "stoned" + i).data("hp");
+            status.mp = $("#" + prefix + "stoned" + i).data("mp");
+            status.atk = $("#" + prefix + "stoned" + i).data("atk");
+            status.def = $("#" + prefix + "stoned" + i).data("def");
+            status.agi = $("#" + prefix + "stoned" + i).data("agi");
+            status.wis = $("#" + prefix + "stoned" + i).data("wis");
+        } else if (stoned == "fsemp" || stoned == "fs") {
+            status.hp += g.getStoneHP();
+            status.atk += g.getStoneATK();
+            status.def += g.getStoneDEF();
+            status.agi += g.getStoneAGI();
+            status.wis += g.getStoneWIS();
+            if (stoned == "fs")
+                status.mp += g.getStoneMP();
+        }
+        /* Save the original values. */
+        status.ohp = status.hp;
+        status.omp = status.mp;
+        status.oatk = status.atk;
+        status.odef = status.def;
+        status.oagi = status.agi;
+        status.owis = status.wis;
+
+        g.battle = {
+            status: status,
+            atk: 0, 
+            def: 0, 
+            agi: 0, 
+            wis: 0,
+            stoned: stoned,
+            first: true,
+            appeared: false,
+            attacked: false, /* Indicate if a card has been attacked */
+            buff: true,      /* Can cast buff/debuff skills? */
+            ls: true,        /* Can cast LS? */
+            revival: true,   /* Can cast Revival? */
+            ep: true,        /* Can cast EP? */
+            sap: true        /* Can cast Sap? */
+        };
+
+        var gskills = getSkills(prefix, i);
+        gskills.sort(function(x, y) {
+            if (x.cost.mp < y.cost.mp)
+                return -1;
+            else if (x.cost.mp > y.cost.mp)
+                return 1;
+            else
+                return Sorting.name(x, y);
+        });
+        g.setSkills(gskills);
+
+        /* The index of the card in the line. */
+        g.battle.line = gs.length;
+
+        gs.push(g);
+    }
+    return gs;
+}
+
+function toString(target) {
+    var gs = getGuardians(target);
+    var res = new Array();
+    for (var i = 0; i < gs.length; i++) {
+        var g = gs[i];
+        var strs = new Array();
+        strs.push("id=" + g.id);
+        strs.push("type=" + g.type.id);
+        strs.push("level=" + g.getLevel());
+        strs.push("stoned=" + g.battle.stoned);
+        var sks = g.getSkills();
+        sks = List.map(function(s) { return s.id; }, sks);
+        strs.push("skills=" + sks.join(","));
+        if (g.battle.stoned == "custom") {
+            strs.push("hp=" + g.battle.status.ohp);
+            strs.push("mp=" + g.battle.status.omp);
+            strs.push("atk=" + g.battle.status.oatk);
+            strs.push("def=" + g.battle.status.odef);
+            strs.push("agi=" + g.battle.status.oagi);
+            strs.push("wis=" + g.battle.status.owis);
+        }
+        res.push(strs.join("&"));
+    }
+    return res.join(" +\n");
+}
+
+function fromString(target) {
+    var prefix = target.prefix;
+    var input = $("#" + prefix + "guardians").val().replace(/[\r\n\t ]+/g, "");
+    var strs = input.split("+");
+    for (var i = 0; i < strs.length; i++) {   
+        var id = -1;
+        var type = 0;
+        var level = 1;
+        var stoned = "clean";
+        var sks = new Array();
+        var hp = 0;
+        var mp = 0;
+        var atk = 0;
+        var def = 0;
+        var agi = 0;
+        var wis = 0;
+
+        var tokens = strs[i].split("&");
+
+        for (var j = 0; j < tokens.length; j++) {
+            var token = tokens[j];
+            if (token.indexOf("id=") != -1)
+                id = token.substring(3);
+            else if (token.indexOf("type=") != -1)
+                type = parseInt(token.substring(5));
+            else if (token.indexOf("level=") != -1)
+                level = token.substring(6);
+            else if (token.indexOf("stoned=") != -1)
+                stoned = token.substring(7);
+            else if (token.indexOf("skills=") != -1)
+                sks = token.substring(7).split(",");
+            else if (token.indexOf("hp=") != -1)
+                hp = parseInt(token.substring(3));
+            else if (token.indexOf("mp=") != -1)
+                mp = parseInt(token.substring(3));
+            else if (token.indexOf("atk=") != -1)
+                atk = parseInt(token.substring(4));
+            else if (token.indexOf("def=") != -1)
+                def = parseInt(token.substring(4));
+            else if (token.indexOf("agi=") != -1)
+                agi = parseInt(token.substring(4));
+            else if (token.indexOf("wis=") != -1)
+                wis = parseInt(token.substring(4));
+        }
+
+        var g = Card.get(id);
+        if (g == null)
+            continue;
+
+        insertStars(prefix, i);
+        setStars(prefix, i, g.stars);
+        setGuardian(prefix, i, id);
+        setType(prefix, i, type);
+        setLevel(prefix, i, level);
+        setStoned(prefix, i, stoned);
+        setSkills(prefix, i, sks);
+        if (stoned == "custom") {
+            setCustomStatus(prefix, i, {hp: hp, mp: mp, atk: atk, def: def, agi: agi, wis: wis});
+        }
+    }
+    $("#" + prefix + "guardians").val("");
+}
+
+
+
+function applyBuff(g1, g2, skill, rev) {
+    if (skill.cost.mp > g1.battle.status.mp)
+        return;
+
+    g1.battle.status.mp -= skill.cost.mp;
+
+    msg(g1, g2, g1.name + "'s " + skill.name, {rev: rev, type: MSG_BUFF});
+
+    if (skill.atk > 0)
+        g1.battle.atk += skill.atk;
+    if (skill.atk < 0)
+        g2.battle.atk += skill.atk;
+    if (skill.def > 0)
+        g1.battle.def += skill.def;
+    if (skill.def < 0)
+        g2.battle.def += skill.def;
+    if (skill.agi > 0)
+        g1.battle.agi += skill.agi;
+    if (skill.agi < 0)
+        g2.battle.agi += skill.agi;
+    if (skill.wis > 0)
+        g1.battle.wis += skill.wis;
+    if (skill.wis < 0)
+        g2.battle.wis += skill.wis;
+    
+    var msgs = new Array();
+    if (skill.atk > 0)
+        msgs.push(g1.name + "'s ATK increased by " + Math.floor(g1.battle.status.atk * skill.atk));
+    if (skill.atk < 0)
+        msgs.push(g2.name + "'s ATK lowered by " + Math.floor(-(g2.battle.status.atk * skill.atk)));
+    if (skill.def > 0)
+        msgs.push(g1.name + "'s DEF increased by " + Math.floor(g1.battle.status.def * skill.def));
+    if (skill.def < 0)
+        msgs.push(g2.name + "'s DEF lowered by " + Math.floor(-(g2.battle.status.def * skill.def)));
+    if (skill.agi > 0)
+        msgs.push(g1.name + "'s AGI increased by " + Math.floor(g1.battle.status.agi * skill.agi));
+    if (skill.agi < 0)
+        msgs.push(g2.name + "'s AGI lowered by " + Math.floor(-(g2.battle.status.agi * skill.agi)));
+    if (skill.wis > 0)
+        msgs.push(g1.name + "'s WIS increased by " + Math.floor(g1.battle.status.wis * skill.wis));
+    if (skill.wis < 0)
+        msgs.push(g2.name + "'s WIS lowered by " + Math.floor(-(g2.battle.status.wis * skill.wis)));
+    
+    msg(g1, g2, msgs.join("\n"), {rev: rev, type: MSG_BUFF});
+}
+
+function applyBuffs(g1, g2, rev) {
+    var sks = g1.getSkills();
+    for (var i = 0; i < sks.length; i++) {
+        var skill = sks[i];
+        if (skill.isBuff() && skill.cost.mp <= g1.battle.status.mp)
+            applyBuff(g1, g2, skill, rev);
+        else if (skill.isDebuff() && skill.cost.mp <= g1.battle.status.mp)
+            applyBuff(g1, g2, skill, rev);
+    }
+}
+
+function getDeathRate(aw, skill, buf, attr, dw, debuf) {
+    return 1 - (((dw * (1 + debuf)) / 2) / (aw * (1 + skill + buf) * attr));
+}
+
+function getSkillDamage(g1, g2, skill) {
+    var atk = 0;
+    var sk = 0;
+    var buff1 = 0;
+    var def = 0;
+    var buff2 = 0;
+    var damage = 0;
+
+    if (skill != null && 
+        !((skill == Skill.qs || skill == Skill.smash || skill.isPhysical() || skill.isElemental()) && skill.cost.mp <= g1.battle.status.mp))
+        return 0;
+
+    if (skill == null) {
+        atk = g1.battle.status.atk;
+        sk = 0;
+        buff1 = g1.battle.atk;
+        attr = 1;
+        def = g2.battle.status.def;
+        buff2 = g2.battle.def;
+        damage = Math.max(1, Calculator.getDamage(atk, sk, buff1, attr, def, buff2));
+    } else if (skill == Skill.qs && skill.cost.mp <= g1.battle.status.mp) {
+        atk = g1.battle.status.atk;
+        sk = -0.15;
+        buff1 = 0;
+        attr = 1;
+        def = g2.battle.status.def;
+        buff2 = g2.battle.def;
+        damage = Math.max(1, Calculator.getDamage(atk, sk, buff1, attr, def, buff2));
+    } else if (skill == Skill.smash && Skill.smash.cost.mp <= g1.battle.status.mp) {
+            atk = g1.battle.status.atk;
+            sk = 0;
+            buff1 = g1.battle.atk;
+            def = g2.battle.status.def;
+            buff2 = -1;
+        if (Math.random() < options.smash)
+            attr = 2;
+        else
+            attr = 0.5;
+        damage = Math.max(1, Calculator.getDamage(atk, sk, buff1, attr, def, buff2));
+    } else if (skill.isPhysical() && skill.cost.mp <= g1.battle.status.mp) {
+        atk = g1.battle.status.atk;
+        sk = Calculator.sklill_mult[skill.level - 1];
+        buff1 = g1.battle.atk;
+        attr = 1;
+        def = g2.battle.status.def;
+        buff2 = g2.battle.def;
+        damage = Math.max(1, Calculator.getDamage(atk, sk, buff1, attr, def, buff2));
+    } else if (skill.isElemental() && skill.cost.mp <= g1.battle.status.mp) {
+        atk = g1.battle.status.wis;
+        sk = Calculator.skill_mult[skill.level - 1];
+        buff1 = g1.battle.wis;
+        attr = skill.attribute.isCriticalTo(g2.attribute) ? 1.15 : (skill.attribute.isBlockedBy(g2.attribute) ? 0.85 : 1);
+        def = g2.battle.status.wis;
+        buff2 = g2.battle.wis;
+        damage = Math.max(1, Calculator.getDamage(atk, sk, buff1, attr, def, buff2));
+    }
+
+    return damage;
+}
+
+function attack(g1, g2, skill, rev) {
+    if (skill == Skill.heal)
+        return applyHeal(g1, g2, rev);
+    else if (skill == Skill.majorheal)
+        return applyGreaterHeal(g1, g2, rev);
+    else if (skill == Skill.life)
+        return applyLifeDrain(g1, g2, rev);
+    else if (skill == Skill.mana)
+        return applyManaDrain(g1, g2, rev);
+    else if (skill != null && skill.isDeath()) {
+        return applyDeath(g1, g2, skill, rev);
+    }
+
+    var damage = getSkillDamage(g1, g2, skill);
+    if (damage <= 0)
+        return;
+
+    var name = skill == null ? "Normal Attack" : skill.name;
+
+    if (skill != null)
+        g1.battle.status.mp -= skill.cost.mp;
+
+    if (skill == Skill.qs)
+        msg(g1, g2, g1.name + "'s " + name, {rev: rev, type: MSG_QS});
+    else
+        msg(g1, g2, g1.name + "'s " + name, {rev: rev, type: MSG_ATTACK});
+
+    if (!((skill == null || skill.isPhysical()) && applyDS(g2, g1))) {
+        g2.battle.status.hp -= damage;
+        
+        if (skill == Skill.smash) {
+            if (damage <= g1.battle.status.atk)
+                msg(g1, g2, "Glancing blow", {rev: rev, type: MSG_OTHER});
+            else
+                msg(g1, g2, "Critical hit!", {rev: rev, type: MSG_OTHER});
+        }
+
+        msg(g1, g2, damage + " damage to " + g2.name, {rev: rev, type: MSG_DAMAGE});
+
+        /* Hard Slash */
+        if (skill != null && skill.id == 1) {
+            g2.battle.agi -= 0.1;
+            msg(g1, g2, "AGI reduced by " + Math.floor(g2.battle.status.agi * 0.1), {rev: rev, type: MSG_BUFF});
+        }
+
+        /* Heavy Blow */
+        if (skill != null && skill.id == 5) {
+            g2.battle.def -= 0.1;
+            msg(g1, g2, "DEF reduced by " + Math.floor(g2.battle.status.def * 0.1), {rev: rev, type: MSG_BUFF});
+        }
+    }
+}
+
+function getBestSkill(g1, g2) {
+    /* Always use normal attack if the opponent casted LS. */
+    if (g2.battle.status.hp == 1)
+        return null;
+
+    if (g1.hasSkill(Skill.mana) && g1.battle.status.mp < g1.battle.status.omp && g2.battle.status.mp > 0)
+        return mana;
+
+    if (g1.hasSkill(Skill.smash) && g1.battle.status.mp >= Skill.smash.cost.mp)
+        return smash;
+
+    var res = null;
+    var damage = getSkillDamage(g1, g2, null);
+
+    var sks = g1.getSkills();
+    for (var i = 0; i < sks.length; i++) {
+        /* Ignore QS in attacking phase. */
+        if (sks[i] == Skill.qs)
+            continue;
+        var dmg = getSkillDamage(g1, g2, sks[i]);
+        if (dmg >= g2.battle.status.hp) {
+            damage = dmg;
+            res = sks[i];
+            break;
+        }
+        if (dmg > damage) {
+            damage = dmg;
+            res = sks[i];
+        }
+    }
+    
+    if (damage < g2.battle.status.hp) {
+        if (g1.battle.status.hp < g1.battle.status.ohp) {
+            if (g1.hasSkill(Skill.majorheal))
+                return Skill.majorheal;
+            else if (g1.hasSkill(Skill.heal))
+                return Skill.heal;
+        }
+    
+        if (g1.hasSkill(Skill.mana) && g1.battle.status.mp < g1.battle.status.omp && g2.battle.status.mp > 0)
+            return Skill.mana;
+
+        if (g1.hasSkill(Skill.life) && g1.battle.status.hp < g1.battle.status.ohp)
+            return Skill.life;
+    }
+    
+    return res;
+}
+
+function applyDeath(g1, g2, skill, rev) {
+    msg(g1, g2, g1.name + "'s " + skill.name, {rev: rev, type: MSG_ATTACK});
+
+    var atk = g1.battle.status.wis;
+    var sk = Calculator.skill_mult[skill.level - 1];
+    var buff1 = g1.battle.wis;
+    var attr = skill.attribute.isCriticalTo(g2.attribute) ? 1.15 : (skill.attribute.isBlockedBy(g2.attribute) ? 0.85 : 1);
+    var def = g2.battle.status.wis;
+    var buff2 = g2.battle.wis;
+    var rate = getDeathRate(atk, sk, buff1, attr, def, buff2);
+    if (Math.random() < rate) {
+        g1.battle.status.mp -= skill.cost.mp;
+        g2.battle.status.hp = 0;
+        msg(g1, g2, g2.name + " dies instantly", {rev: rev, type: MSG_OTHER});
+    } else {
+        msg(g1, g2, g2.name + " defies " + skill.name, {rev: rev, type: MSG_OTHER});
+    }
+}
+
+function applyLS(g1, g2, rev) {
+    if (g1.battle.ls && g1.hasSkill(Skill.ls) && g1.battle.status.mp > 0) {
+        g1.battle.ls = false;
+        if (Math.random() < options.ls) {
+            msg(g1, g2, g1.name + "'s " + Skill.ls.name, {rev: rev, type: MSG_OTHER});
+            g1.battle.status.hp = 1;
+            g1.battle.status.mp = 0;
+            msg(g1, g2, g1.name + " endures", {rev: rev, type: MSG_OTHER});
+            return true;
+        } else
+            return false;
+    } else
+        return false;
+}
+
+function applySap(g1, g2, rev) {
+    if (g1.battle.sap && g1.hasSkill(Skill.sap) && Skill.sap.cost.mp <= g1.battle.status.mp) {
+        g1.battle.sap = false;
+        msg(g1, g2, g1.name + "'s " + Skill.sap.name, {rev: rev, type: MSG_BUFF});
+        if (Math.random() < options.sap) {
+            g1.battle.status.mp -= Skill.sap.cost.mp;
+            g2.battle.status.mp = 0;
+            msg(g1, g2, g2.name + " is sapped.", {rev: rev, type: MSG_BUFF});
+            return true;
+        } else {
+            msg(g1, g2, g2.name + " is unaffected.", {rev: rev, type: MSG_BUFF});
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function applyEP(g1, g2, rev) {
+    if (g1.battle.ep && g1.hasSkill(Skill.ep) && Skill.ep.cost.mp <= g1.battle.status.mp) {
+        if (g2.battle.atk > 0 || g2.battle.def > 0 || g2.battle.agi > 0 || g2.battle.wis > 0) {
+            g1.battle.ep = false;
+            msg(g1, g2, g1.name + "'s " + Skill.ep.name, {rev: rev, type: MSG_BUFF});
+            g1.battle.status.mp -= Skill.ep.cost.mp;
+            g2.battle.atk = Math.min(0, g2.battle.atk);
+            g2.battle.def = Math.min(0, g2.battle.def);
+            g2.battle.agi = Math.min(0, g2.battle.agi);
+            g2.battle.wis = Math.min(0, g2.battle.wis);
+            msg(g1, g2, g2.name + "'s enhancements fade.", {rev: rev, type: MSG_BUFF});
+            return true;
+        } else
+            return false;
+    } else
+        return false;
+}
+
+function applyDS(g1, g2, rev) {
+    if (g1.hasSkill(Skill.ds) && Skill.ds.cost.mp <= g1.battle.status.mp && Math.random() < options.ds) {
+        g1.battle.status.mp -= Skill.ds.cost.mp;
+        msg(g1, g2, g1.name + " evades the attack.", {rev: rev, type: MSG_DS});
+        return true;
+    } else
+        return false;
+}
+
+function applySD(g1, g2, rev) {
+    if (g1.hasSkill(Skill.sd)) {
+        msg(g1, g2, g1.name + "'s " + Skill.sd.name, {rev: rev, type: MSG_SD});
+        if (Math.random() < options.sd) {
+            var damage = g1.battle.status.mp;
+            g2.battle.status.hp -= damage;
+            g1.battle.status.hp = 0;
+            g1.battle.status.mp = 0;
+            msg(g1, g2, damage + " damage to " + g2.name, {rev: rev, type: MSG_DAMAGE});
+            return g2.battle.status.hp <= 0;
+        } else {
+            msg(g1, g2, g1.name + "'s " + Skill.sd.name + " fails", {rev: rev, type: MSG_OTHER});
+            return false;
+        }
+    } else
+        return false;
+}
+
+function applyRevival(g1, g2, rev) {
+    if (g1.battle.revival && g1.hasSkill(Skill.revival) && Skill.revival.cost.mp <= g1.battle.status.mp) {
+        g1.battle.revival = false;
+        if (Math.random() < options.revival) {
+            g1.battle.status.mp -= Skill.revival.cost.mp;
+            g1.battle.status.hp = g1.battle.status.ohp;
+            
+            /* Make this card appear next time as the first appearance. */
+            g1.battle.first = true;
+
+            msg(g1, g2, g1.name + "'s " + Skill.revival.name, {rev: rev, type: MSG_OTHER});
+            msg(g1, g2, g1.name + " came back to life", {rev: rev, type: MSG_REVIVAL});
+            return true;
+        } else {
+            msg(g1, g2, g1.name + " failed to revive", {rev: rev, type: MSG_OTHER});
+            return false;
+        }
+    } else
+        return false;
+}
+
+function applyHeal(g1, g2, rev) {
+    g1.battle.status.mp -= Skill.heal.cost.mp;
+    msg(g1, g2, g1.name + "'s " + Skill.heal.name, {rev: rev, type: MSG_OTHER});
+}
+
+function applyGreaterHeal(g1, g2, rev) {
+    g1.battle.status.mp -= Skill.majorheal.cost.mp;
+    msg(g1, g2, g1.name + "'s " + Skill.majorheal.name, {rev: rev, type: MSG_OTHER});
+}
+
+function applyLifeDrain(g1, g2, rev) {
+    msg(g1, g2, g1.name + "'s " + Skill.life.name, {rev: rev, type: MSG_OTHER});
+
+    var damage = Math.max(1, Math.floor(g1.battle.status.atk - g2.battle.status.atk / 2));
+    damage = Math.min(g2.battle.status.hp, damage);
+    g2.battle.status.hp -= damage;
+    msg(g1, g2, damage + " damage to " + g2.name, {rev: rev, type: MSG_OTHER});
+    
+    var absorbed = Math.max(1, Math.floor(damage * 0.6));
+    msg(g1, g2, "Absorbed " + absorbed + " HP", {rev: rev, type: MSG_OTHER});
+}
+
+function applyManaDrain(g1, g2, rev) {
+    msg(g1, g2, g1.name + "'s " + Skill.mana.name, {rev: rev, type: MSG_OTHER});
+
+    var damage = Math.max(1, Math.floor(g1.battle.status.wis - g2.battle.status.wis / 2));
+    damage = Math.min(g2.battle.status.mp, damage);
+    g2.battle.status.mp -= damage;
+    msg(g1, g2, damage + " damage to " + g2.name, {rev: rev, type: MSG_OTHER});
+    
+    /* MP absorbed = MP Damage * 0.6 */
+    var absorbed = Math.max(1, Math.floor(damage * 0.6));
+    msg(g1, g2, "Absorbed " + absorbed + " MP", {rev: rev, type: MSG_OTHER});
+}
+
+function insertAvatars(target, gs, dir, callback) {
+    $(target.id + "_avatars")
+        .html("")
+        .hide();
+    for (var i = 0; i < gs.length; i++) {
+        $(target.id + "_avatars")
+            .append($(gs[i].getBattleImage()).addClass("avatar"));
+    }
+    $(target.id + "_avatars").toggle("slide", {direction: dir, distance: SLIDE_DISTANCE}, ANIMATION_DURATION, callback);
+}
+
+function simulate(rounds) {
+    loadOptions();
+
+    $("#battle-top button").button("disable");
+    clearMessage();
+
+    var my = getGuardians(targets[0]);
+    var oppo = getGuardians(targets[1]);
+
+    if (rounds == 1) {
+        options.battle_message = true;
+        $(targets[0].id).toggle("slide", {direction: "left", distance: SLIDE_DISTANCE}, ANIMATION_DURATION, function() {
+            insertAvatars(targets[0], my, "left");
+        });
+        $(targets[1].id).toggle("slide", {direction: "right", distance: SLIDE_DISTANCE}, ANIMATION_DURATION, function() {
+            insertAvatars(targets[1], oppo, "right", function() { 
+                battle(my, oppo);
+                output();
+            });
+        });
+    } else {
+        options.battle_message = false;
+        var my_status = new Array();
+        var oppo_status = new Array();
+        var parties = new Array({src: my, dst: my_status}, {src: oppo, dst: oppo_status});
+        for (var i = 0; i < parties.length; i++) {
+            var party = parties[i];
+            for (var j = 0; j < party.src.length; j++) {
+                var b = clone(party.src[j].battle);
+                b.status = clone(party.src[j].battle.status);
+                party.dst.push(b);
+            }
+        }
+
+        var wins = 0;
+        for (var i = 0; i < rounds; i++) {
+            if (battle(my, oppo))
+                wins++;
+            for (j = 0; j < parties.length; j++) {
+                var party = parties[j];
+                for (var k = 0; k < party.src.length; k++) {
+                    party.src[k].battle = clone(party.dst[k]);
+                    party.src[k].battle.status = clone(party.dst[k].status);
+                }
+            }
+        }
+        var rate = Math.floor(1000 * (wins / rounds)) / 1000;
+        outputMessage("Simulated " + rounds + " battles");
+        outputMessage("# of wins: " + wins);
+        outputMessage("# of losses: " + (rounds - wins));
+        outputMessage("Win rate: " + rate);  
+
+        $("#battle-top button").button("enable");      
+    }
+}
+
+function battle(my, oppo) {
+    if (my.length == 0 || oppo.length == 0)
+        return true;
+
+    var meter1 = 0;
+    var meter2 = 0;
+    var i1 = 0;
+    var i2 = 0;
+
+    var g1 = my[i1];
+    var g2 = oppo[i2];
+
+    var win = null;
+    while(true) {
+        if (i2 == oppo.length) {
+            msg(g1, g2, "Won Battle", {type: MSG_OTHER});
+            return true;
+        } else if (i1 == my.length) {
+            msg(g1, g2, "Lost Battle", {type: MSG_OTHER});
+            return false;
+        } 
+
+        g1 = my[i1];
+        g2 = oppo[i2];
+
+        var action = 0;
+
+        var prev_meter1 = meter1;
+        var prev_meter2 = meter2;
+
+        var agi1 = 0;
+        var agi2 = 0;
+        if (options.agibuff == 0) {
+            agi1 = Math.max(1, (g1.battle.status.agi * (1 + g1.battle.agi)));
+            agi2 = Math.max(1, (g2.battle.status.agi * (1 + g2.battle.agi)));
+        } else if (options.agibuff == 1) {
+            agi1 = g1.battle.status.agi;
+            agi2 = g2.battle.status.agi;
+        } else if (options.agibuff == 2) {
+            agi1 = g1.attacked ? 
+                Math.max(1, (g1.battle.status.agi * (1 + g1.battle.agi))) : 
+                g1.battle.status.agi;
+            agi2 = g2.attacked ?
+                Math.max(1, (g1.battle.status.agi * (1 + g1.battle.agi))) :
+                g2.battle.status.agi;
+        }
+        var rounds1 = (options.meter - meter1) / agi1;
+        var rounds2 = (options.meter - meter2) / agi2;
+        var rev = false;        
+        if (rounds1 <= rounds2) {
+            meter1 = 0;
+            meter2 += Math.floor(rounds1 * agi2);
+        } else {
+            meter1 += Math.floor(rounds2 * agi1);
+            meter2 = 0;
+            rev = true;
+        }
+        
+        if (rev) {
+            var tmp = g1;
+            g1 = g2;
+            g2 = tmp;
+        }
+
+
+        /* First appearance. */
+        if (!g1.battle.appeared) {
+            g1.battle.appeared = true;
+
+            /* Apply QS. */
+            if (g1.hasSkill(Skill.qs)) {
+                attack(g1, g2, Skill.qs, rev);
+                if (g2.battle.status.hp <= 0 && !applyLS(g2, g1, !rev)) {
+                    if (rev) i1++; else i2++;
+                    if (applySD(g2, g1, !rev))
+                        if (rev) i2++; else i1++;
+                    else {
+                        msg(g1, g2, "Defeated " + g2.name, {rev: rev, type: MSG_DEFEATED});
+                        if (applyRevival(g2, g1, !rev))
+                            if (rev) i1--; else i2--;
+                    }
+                    
+                    /* Reset ATB bars after a QS-kill. */
+                    if (options.qs_reset == QS_RESET_NONE)
+                        ;
+                    else if (options.qs_reset == QS_RESET_PREVIOUS) {
+                        meter1 = prev_meter1;
+                        meter2 = prev_meter2;
+                    } else if (options.qs_reset == QS_RESET_ZERO) {
+                        meter1 = 0;
+                        meter2 = 0;
+                    }
+
+                    continue;
+                }
+            }                
+        }
+
+        /* First appearance. */
+        if (!g2.battle.appeared) {
+            g2.battle.appeared = true;
+
+            /* Apply QS. */
+            if (g2.hasSkill(Skill.qs)) {
+                attack(g2, g1, Skill.qs, !rev);
+                if (g1.battle.status.hp <= 0 && !applyLS(g1, g2, rev)) {
+                    if (rev) i2++; else i1++;
+                    if (applySD(g1, g2, rev))
+                        if (rev) i1++; else i2++;
+                    else {
+                        msg(g1, g2, "Defeated " + g1.name, {rev: rev, type: MSG_DEFEATED});
+                        if (applyRevival(g1, g2, rev))
+                            if (rev) i2--; else i1--;
+                    }
+
+                    /* Reset ATB bars after a QS-kill. */
+                    if (options.qs_reset == QS_RESET_NONE)
+                        ;
+                    else if (options.qs_reset == QS_RESET_PREVIOUS) {
+                        meter1 = prev_meter1;
+                        meter2 = prev_meter2;
+                    } else if (options.qs_reset == QS_RESET_ZERO) {
+                        meter1 = 0;
+                        meter2 = 0;
+                    }
+
+                    continue;
+                }
+            }                
+        }
+
+        /* Apply Buffs and Debuffs. */
+        if (g1.battle.buff) {
+            g1.battle.buff = false;
+            applyBuffs(g1, g2, rev);
+        }
+
+        /* Apply Buffs and Debuffs. */
+        if (g2.battle.buff) {
+            g2.battle.buff = false;
+            applyBuffs(g2, g1, !rev);
+        }
+
+        /* Apply Sap and EP. */
+        applySap(g1, g2, rev);
+        applyEP(g1, g2, rev);
+
+        /* Apply EP. */
+        applySap(g2, g1, !rev);
+        applyEP(g2, g1, !rev);
+
+        /* Apply attack skills. */
+        var skill = getBestSkill(g1, g2);
+        attack(g1, g2, skill, rev);
+        g2.attacked = true;
+        if (g2.battle.status.hp <= 0 && !applyLS(g2, g1, !rev)) {
+            if (rev) i1++; else i2++;
+            if (applySD(g2, g1, !rev)) {
+                if (rev) i2++; else i1++;
+            } else {
+                msg(g1, g2, "Defeated " + g2.name, {type: MSG_DEFEATED, rev: rev});
+                if (applyRevival(g2, g1, !rev))
+                    if (rev) i1--; else i2--;
+            }
+        }
+        
+        if (rev) {
+            var tmp = g1;
+            g1 = g2;
+            g2 = tmp;
+        }
+    }
+}
+
+function output() {
+    if (messages.length == 0) {
+        return finalize();
+    }
+
+    var d = messages.shift();
+    setImage(targets[0], "battle-my", d.g1);
+    setImage(targets[1], "battle-oppo", d.g2);
+
+    var effects = new Array();
+    var attacker = d.a == d.g1 ? "battle-my" : "battle-oppo";
+    var defender = d.d == d.g1 ? "battle-my" : "battle-oppo";
+    if (options.animation) {
+        if (d.t == MSG_ATTACK) {
+            effects.push({target: defender, effect: "shake", method: "effect"});
+        } else if (d.t == MSG_SD) {
+            effects.push({target: attacker, effect: "explode", method: "toggle"});
+        } else if (d.t == MSG_QS) {
+            effects.push({target: attacker, effect: "slide", method: "effect"});
+            effects.push({target: defender, effect: "shake", method: "effect"});
+        }
+    }
+
+    outputMessage(d.m);
+
+    var f = function() {
+        if (effects.length == 0) {
+            setTimeout(output, options.delay);
+        } else {
+            var e = effects.shift();
+            if (e.method == "toggle")
+                $("#" + e.target + "-image img").toggle(e.effect, f);
+            else
+                $("#" + e.target + "-image img").effect(e.effect, f);
+        }
+    };
+    f();
+}
+
+function finalize() {
+    for (var i = 0; i < targets.length; i++) {
+        $(targets[i].id + "_avatars")
+            .toggle("slide", {direction: i == 0 ? "left" : "right", distance: SLIDE_DISTANCE}, ANIMATION_DURATION, (function(i) {
+                return function() {
+                    $(targets[i].id).toggle("slide", {direction: i == 0 ? "left" : "right", distance: SLIDE_DISTANCE}, ANIMATION_DURATION);
+                };
+            })(i));
+    }
+    
+    $("#battle-top button").button("enable");
+}
+
+function loadOptions() {
+    $("#option-dialog input:text").each(function() {
+        options[$(this).attr('id').substring(8)] = $(this).val();
+    });
+    options.animation = $("#option-dialog input[name=animation]:checked").val() == "true";
+    options.agibuff = parseInt($("#options-agibuff").val());
+    options.qs_reset = parseInt($("#options-qs-reset").val());
+}
+
+function reset() {
+    for (var i = 0; i < targets.length; i++) {
+        var prefix = targets[i].prefix;
+        for (var j = 0; j < TEAM_SIZE; j++) {
+            $("#" + prefix + "stars" + j)
+                .val(0)
+                .change();
+        }
+    }
+}
+
+function showBattleAcknowledgements() {
+    $("#acknowledgements-dialog").dialog("open");
+}
+
+function battle_init() {
+    $("#option-dialog")
+        .dialog({
+            modal: true, 
+            title: "Options",
+            buttons: [
+                {text: "Close", click: function() { $(this).dialog("close"); }}
+            ],
+            autoOpen: false,
+            position: {my: "center", at: "top", of: window},
+            width: 600,
+            close: function(event, ui) {
+                loadOptions();
+                setCookie(COOKIE_DELAY, options.delay);
+                setCookie(COOKIE_METER, options.meter);
+                setCookie(COOKIE_SD, options.sd);
+                setCookie(COOKIE_LS, options.ls);
+                setCookie(COOKIE_REVIVAL, options.revival);
+                setCookie(COOKIE_DS, options.ds);
+                setCookie(COOKIE_SAP, options.sap);
+                setCookie(COOKIE_SMASH, options.smash);
+                setCookie(COOKIE_ANIMATION, options.animation);
+                setCookie(COOKIE_BATTLE_MESSAGE, options.battle_message);
+                setCookie(COOKIE_AGIBUFF, options.agibuff);
+            }
+        });
+    $("#option-dialog input:text").each(function() {
+        $(this).val(options[$(this).attr('id').substring(8)]);
+    });
+    $("#option-dialog input[name=animation]").each(function() {
+        if ($(this).val() == String(options.animation))
+            $(this).attr("checked", true);
+    });
+    $("#options-agibuff").val(options.agibuff);
+    $("#options-qs-reset").val(options.qs_reset);
+    $("#battle-button")
+        .button()
+        .click(function() {
+            simulate(1); 
+        });
+    $("#winrate-button")
+        .button()
+        .click(function() {
+            var rounds = parseInt(prompt("Enter the number of battles to be simulated: ", 100));
+            if (!isNaN(rounds))
+                simulate(rounds); 
+        });
+    $("#options-button")
+        .button()
+        .click(function() {
+            $("#option-dialog").dialog("open");
+        });
+    $("#reset-button")
+        .button()
+        .click(function() {
+            reset();
+        });
+    $("#help-dialog")
+        .dialog({
+            modal: true, 
+            title: "Help",
+            buttons: [
+                {text: "Close", click: function() { $(this).dialog("close"); }}
+            ],
+            autoOpen: false,
+            position: {my: "center", at: "top", of: window},
+            width: 600
+        });
+    $("#help-button")
+        .button()
+        .click(function() {
+            $("#help-dialog").dialog("open");
+        });
+    $("#acknowledgements-dialog")
+        .dialog({
+            modal: true, 
+            title: "Acknowledgements",
+            buttons: [
+                {text: "Close", click: function() { $(this).dialog("close"); }}
+            ],
+            autoOpen: false,
+            position: {my: "center", at: "top", of: window},
+            width: 600
+        });
+        
+
+    for (var i = 0; i < targets.length; i++) {
+        var target = targets[i];
+        var id = target.id;
+        var prefix = target.prefix;
+        var title = target.title;
+        $(id).append("<h3>" + title + "</h3>");
+        for (var j = 0; j < TEAM_SIZE; j++) {
+            $(id).append($("<div id='" + prefix + "line" + j + "'></div>").data("index", j).data("prefix", prefix)
+                .append("<span class='battle-line-header'>" + (j + 1) + "</span>")
+                .append("<select id='" + prefix + "stars" + j + "' class='battle-line-stars'></select>")
+                .append("<select id='" + prefix + "guardian" + j + "' class='battle-line-guardian'></select>")
+                .append("<br/>")
+                .append(
+                    $("<span class='battle-line-arrows'></span>")
+                        .append(
+                            $("<img src='images/down.gif' width='24px' />")
+                                .click((function(prefix) {
+                                    return function() {
+                                        moveDown(prefix, $(this).parent().parent().data("index"));
+                                    };
+                                })(prefix))
+                        )
+                        .append(
+                            $("<img src='images/up.gif' width='24px' />")
+                                .click((function(prefix) {
+                                    return function() {
+                                        moveUp(prefix, $(this).parent().parent().data("index"));
+                                    };
+                                })(prefix))
+                        )
+                )
+                .append("<select id='" + prefix + "type" + j + "' class='battle-line-type'></select>")
+                .append("<select id='" + prefix + "level" + j + "' class='battle-line-level'></select>")
+                .append("<select id='" + prefix + "stoned" + j + "' class='battle-line-stoned'></select>")
+                .append("<br/>")
+                .append("<select id='" + prefix + "skill" + j + "_0' class='battle-line-skill'></select>")
+                .append("<br/>")
+                .append("<select id='" + prefix + "skill" + j + "_1' class='battle-line-skill'></select>")
+                .append("<br/>")
+                .append("<select id='" + prefix + "skill" + j + "_2' class='battle-line-skill'></select>")
+                .append("<br/>")
+                .append("<div id='" + prefix + "status" + j + "' class='battle-line-status'></div>")
+            );
+        }
+
+        for (var j = 0; j < TEAM_SIZE; j++)
+            insertStars(prefix, j);
+        
+        $(id)
+            .append("<textarea id='" + prefix + "guardians' rows='5' cols='50'></textarea>")
+            .append(
+                $("<button>Load</button>")
+                    .button()
+                    .click((function(target) {
+                        return function() {
+                            fromString(target);
+                        };
+                    })(target))
+            )
+            .append(
+                $("<button>Save</button>")
+                    .button()
+                    .click((function(target) {
+                        return function() { 
+                            var str = toString(target);
+                            $("#" + target.prefix + "guardians").val(str);
+                        };
+                    })(target))
+            );
+    }
+
+    var preload_my = "";
+    var preload_oppo = "";
+
+    setTimeout(function() {
+        $("#" + targets[0].prefix + "guardians").text(preload_my);
+        fromString(targets[0]);
+        
+        $("#" + targets[1].prefix + "guardians").text(preload_oppo);
+        fromString(targets[1]);
+    }, 1);
+
+}
+
+$(function() {
+    Loader.loadAll(battle_init);
+});
+</script>
+</head>
+
+<body>
+
+
+<div id='battle-top'>
+    <button id="battle-button">Start Battle</button>
+    <button id="winrate-button">Win Rate</button>
+    <button id="options-button">Options</button>
+    <button id="reset-button">Reset</button>
+    <button id="help-button">Help</button>
+</div>
+
+<div id='ability-dialog'>
+</div>
+
+<div id='option-dialog' style='display: none;'>
+    <table class='option-table'>
+        <tr>
+            <th width='250px'>Battle Animations</th>
+            <td>
+                <label><input type='radio' name='animation' value="true" />Yes</label>
+                &nbsp;&nbsp;&nbsp;
+                <label><input type='radio' name='animation' value="false" />No</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=2>(Some effects may not be supported by your browser.)</td>
+        </tr>
+        <tr>
+            <th>Delay of Battle Actions (ms)</th>
+            <td><input type='text' id='options-delay' /></td>
+        </tr>
+        <tr>
+            <th>Probability of Deft Step</th>
+            <td><input type='text' id='options-ds' /></td>
+        </tr>
+        <tr>
+            <th>Probability of Critical Hit by Gigant Smash</th>
+            <td><input type='text' id='options-smash' /></td>
+        </tr>
+        <tr>
+            <th>Probability of Last Stand</th>
+            <td><input type='text' id='options-ls' /></td>
+        </tr>
+        <tr>
+            <th>Probability of Revival</th>
+            <td><input type='text' id='options-revival' /></td>
+        </tr>
+        <tr>
+            <th>Probability of Sap</th>
+            <td><input type='text' id='options-sap' /></td>
+        </tr>
+        <tr>
+            <th>Probability of Self-destruct</th>
+            <td><input type='text' id='options-sd' /></td>
+        </tr>
+        <tr>
+            <th>Count AGI Buffs/Debuffs</th>
+            <td>
+                <select id='options-agibuff'>
+                    <option value='0'>None</option>
+                    <option value='1'>After a card's first round</option>
+                    <option value='2'>After a hit by the opponent</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Reset ATB bars after a QS-kill</th>
+            <td>
+                <select id='options-qs-reset'>
+                    <option value='0'>None</option>
+                    <option value='1'>Reset to previous values</option>
+                    <option value='2'>Reset to 0</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id='help-dialog' style='display: none;' class="justify">
+    <h3>Correctness</h3>
+    I don't have any formal proof.
+    <h3>ATB System</h3>
+    The implemented ATB system is based on <a href="http://guardiancross-forum.com/Thread-AGI-Formula-Explained">this thread</a> on GCF.
+    <h3>Buttons</h3>
+    <ul>
+        <li><b>Start Battle</b>: Simulate a single battle. You may see detailed messages.</li>
+        <li><b>Win Rate</b>: Simulate for a specified number of rounds and see the percentage of wins.</li>
+        <li>
+            <b>Options</b>:
+            Adjust options, including probabilities of several skills.
+            The adjustable rates are collected neither directly from the game nor
+            from statistic data.
+            The rate of death skills is computed based on WIS and skill level without
+            any proof.
+            Considering AGI buff/debuff, there are three options.
+            <ul>
+              <li>None: Do not count AGI buff/debuff.</li>
+              <li>After a card's first round: Count AGI buff/debuff of a card after its first
+              appearance and either it or its opponent performs a non-QS attack.</li>
+              <li>After a hit by the opponent: Count AGI buff/debuff of a card after the
+              opponent's first attack.</li>
+            </ul>
+            Note that for the first AGI buff/debuff option, there are counterexamples
+            found in NPC battles.
+            For the last two AGI buff/debuff options, there are counterexamples
+            found in Friends battles
+        </li>
+        <li><b>Reset</b>: Reset all parties.</li>
+        <li><b>Load</b>: Load a party from a string.</li>
+        <li><b>Save</b>: Convert a party to a string that can be loaded back later.</li>
+    </ul>
+    <h3>Untested Skills</h3>
+    <ul>
+        <li>Ethereal Pulse</li>
+        <li>Gigant Smash</li>
+        <li>Deft Step</li>
+        <li>Sap</li>
+        <li>Mana Drain</li>
+    </ul>
+    <h3>Unsupported Skills</h3>
+    <ul>
+        <li>Heal</li>
+        <li>Greater Heal</li>
+        <li>Life Drain</li>
+        <li>All new skills in version 2.0</li>
+    </ul>
+</div>
+
+<div id="acknowledgements-dialog" style="display: none;" class="justify">
+Thanks
+<ul>
+    <li>小銘@<a href="http://forum.gamer.com.tw/B.php?bsn=22343&subbsn=0" target="_blank">巴哈姆特</a> for providing helps in testing this simulator</li>
+    <li>wadabeep@<a href="http://guardiancross-forum.com/" target="_blank">GCF</a> for pointing out the reset of ATB bars after a QS-kill</li>
+</ul>
+</div>
+
+<div id='battle-center'>
+
+    <div id='battle-left-line'>
+        <div id="my_team">
+        </div>
+        <div id="my_team_avatars">
+        </div>
+    </div>
+
+
+    <div id='battle-info'>
+        <div id='battle-my-image'></div>
+        <div id='battle-my-hp'></div>
+        <div id='battle-my-mp'></div>
+        <div id='battle-oppo-image'></div>
+        <div id='battle-oppo-hp'></div>
+        <div id='battle-oppo-mp'></div>
+        <div id='battle-messages'>
+            <textarea id="message" cols="60" rows="10"></textarea>
+        </div>
+    </div>
+    
+    <div id='battle-right-line'>
+        <div id="oppo_team">
+        </div>
+        <div id="oppo_team_avatars">
+        </div>
+    </div>
+<div id='battle-center'>
+
+
+<div id="footnote">
+<hr/>
+<nav>
+<ul>
+    <li><a href='javascript:showBattleAcknowledgements()'>Acknowledgements</a></li>
+</ul>
+</nav>
+<div>
+    Developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>
+</div>
+<div>
+  All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/" target="_blank">Square Enix</a> Co., Ltd.
+</div>
+<div>
+  Use of this website is at your own risk.
+  No warranty is provided.
+</div>
+<div>
+  Best viewed in <a href="http://www.apple.com/safari/" target="_blank">Safari</a>.
+</div>
+</div>
+
+</body>
+
+</html>

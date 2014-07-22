@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for f in `ls *.png`; do
+  fn=${f/.png/}
+  if [[ ! -f ${fn}.jpg ]]; then
+    sips -s format jpeg ${fn}.png --out ${fn}.jpg
+  fi
+done

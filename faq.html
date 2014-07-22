@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Guardian Cross - Q&amp;A</title>
+<link rel="stylesheet" type="text/css" href="css/gc.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/loader.min.js"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40784747-1', 'fc2.com');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript">
+$(function() {
+    Loader.loadBasic(function() {
+        Nav.init('nav_faq');
+    });
+});
+</script>
+</head>
+<body>
+
+<nav id="top_menu">
+<ul>
+    <li><a id='nav_damage_calculator' href='index.html' class='langdep'>Calculator</a> |</li>
+    <li><a id='nav_cards' href='cards.html' class='langdep'>Cards</a> |</li>
+    <li><a id='nav_excards' href='excards.html' class='langdep'>ExCards</a> |</li>
+    <li><a id='nav_battle_simulator' href='battle.html' class='langdep'>Simulator</a> |</li>
+    <li><a id='nav_battle_simulator2' href='battle2.html' class='langdep'>Simulator II</a> |</li>
+    <li><a id='nav_comparison' href='comparison.html' class='langdep'>Comparison (<span id='comparison_number'>0</span>)</a> |</li>
+    <li><a id='nav_favorites' href='favorites.html' class='langdep'>Favorites</a> |</li>
+    <li><a id='nav_options' href='options.html' class='langdep'>Options</a> ||</li>
+    <li><a id='nav_english' href="index.html" title="English">English</a> |</li>
+    <li><a id='nav_japanese' href="index.html?lang=jp" title="Japanese">Japanese</a> |</li>
+    <li><a id='nav_android' href="http://gccand.web.fc2.com/" target="_blank">Android</a>
+      (by <a href="http://guardiancross-forum.com/User-ikubbq" target="_blank">ikubbq@GCF</a>) |</li>
+    <li><a id='nav_android' href="http://gcandcards.web.fc2.com" target="_blank">Android</a>
+      (by <a href="http://gc-forums.com/member995.html" target="_blank">Purplemandown</a>)</li>
+</ul>
+</nav>
+
+<h1>FAQ</h1>
+
+<div id="faq">
+
+<ul>
+<li><a href="#q_copy">Q: Can I copy your website?</a></li>
+<li><a href="#q_no_card">Q: I cannot see any card. What should I do?</a></li>
+<li><a href="#q_not_loaded">Q: Why there is <span class="warning">[CARD NOT LOADED]</span>?</a></li>
+<li><a href="#q_direct_link">Q: How to get a direct link to a card?</a></li>
+<li><a href="#q_search">Q: How to search for a card?</a></li>
+<li><a href="#q_type_color">Q: What does the color of the big type mean?</a></li>
+<li><a href="#q_max_stats">Q: Why my max card stats are different from yours?</a></li>
+<li><a href="#q_ohko">Q: Why RB Ace Nuada cannot kill (one shot) RB Ace Omega but RB Ace Omega can be
+killed by (one shot by) RB Ace Nuada with Physical+4?</a></li>
+<li><a href="#q_recommended_skills">Q: Are the recommended skills always the best?</a></li>
+<li><a href="#q_aura">Q: Where can I find Aura cards?</a></li>
+</ul>
+
+<hr/>
+
+<div class="question" id="q_copy">Q: Can I copy your website?</div>
+<div class="answer">
+No problem.
+All the HTML, Javascript, CSS code is free for you with the following requirement:
+<ul>
+<li>Make the source code of your addons, changes, and enhancements also free and open to the community.</li>
+</ul>
+Since the Javascript files on the website are compressed and hard to read,
+don't be hesitate to ask me for source code.
+Note that most of the images are owned by <a href="http://www.square-enix.co.jp/smart/gc/" target="_blank">Square Enix</a> Co., Ltd.
+Please don't copy the images from this website.
+</div>
+
+<div class="question" id="q_no_card">Q: I cannot see any card. What should I do?</div>
+<div class="answer">
+First, please make sure that
+<ul>
+    <li>you didn't disable the loading of all cards,</li>
+    <li>your browser is up to date,</li>
+    <li>your browser support HTML5 and Javascript, and</li>
+    <li>your browser is not Internet Explorer (not required).</li>
+</ul>
+<p>
+Internet Explorer is not recommended because I usually use Mac.
+Sometimes I may use features that are not supported by Internet Explorer.
+</p>
+<p>
+If some of the cards are enabled but you cannot see them.
+That may be caused by a Javascript error.
+A possible reason is that when Javascript files are updated on the server,
+the browser (or the network provider) may not fetch all the updated files.
+For this case, please append "nocache=1" to the URL you want to visit.
+For example, the URL "http://gccards.web.fc2.com/cards.html" becomes
+"http://gccards.web.fc2.com/cards.html?nocache=1" while the URL
+"http://gccards.web.fc2.com/cards.html?skill=qs" becomes
+"http://gccards.web.fc2.com/cards.html?skill=qs&amp;nocache=1".
+You may also enable "Force nocache." in Options instead of appending
+"nocache=1" manually.
+</div>
+
+
+
+<div class="question" id="q_not_loaded">
+Q: Why there is <span class="warning">[CARD NOT LOADED]</span>?
+</div>
+<div class="answer">
+That should be a link to a card, which has been disabled by you.
+Sometimes a card missing may be caused by a Javascript error.
+</div>
+
+
+
+<div class="question" id="q_direct_link">Q: How to get a direct link to a card?</div>
+<div class="answer">
+<p>
+When you select a card, click on the big name of the card and then
+the current URL will change. The new URL with "id=xxxxx" is a direct
+link to the card.
+</p>
+<p>
+<img src="images/faq_direct_link.jpg" alt="Direct link to a card" />
+</p>
+</div>
+
+
+
+<div class="question" id="q_search">Q: How to search for a card?</div>
+<div class="answer">
+<p>
+You may search for a card with a specified name by the URL of the
+following form:
+<pre>
+http://gccards.web.fc2.com/?name=TERM
+</pre>
+where TERM is a string of comma separated terms. The first matched
+card will be returned. For example, 
+<a href="http://gccards.web.fc2.com/?name=gilga">http://gccards.web.fc2.com/?name=gilga</a>
+gives you Gilgamesh, and 
+<a href="http://gccards.web.fc2.com/?name=gilga,ffv">http://gccards.web.fc2.com/?name=gilga,ffv</a>
+gives you Gilgamesh (FFV).
+</p>
+
+<p>
+You may also search for a card with a specified ID by the URL of the
+following form:
+<pre>
+http://gccards.web.fc2.com/?id=ID
+</pre>
+where ID is the ID of the card (5 digits). For example,
+<a href="http://gccards.web.fc2.com/?id=40054">http://gccards.web.fc2.com/?id=40054</a>
+gives you Serenade Banshee.
+</p>
+
+<p>
+If you want to search for several cards that satisfy a certain condition, you may use
+the URL of the following form:
+<pre>
+http://gccards.web.fc2.com/cards.html?QUERYS
+</pre>
+where QUERYS is a string of &amp; separated QUERY, QUERY has the form Q=T, and T is a
+string of comma separated search terms. Q may be one of the following:
+<ul>
+<li>id: Search for cards with the IDs.</a>
+<li>name: Search for cards with names containing all the search terms.</a>
+<li>stars: Search for cards with one of the specified stars.</a>
+<li>attr: Search for cards with one of the specified attributes.</a>
+<li>place: Search for cards encountered in one of the specified places.</a>
+<li>border: Search for cards with one of the specified borders (almighty, mighty, great, or none).</a>
+<li>skill: Search for cards with one of the specified skills. (Shorthands such as ls, qs, sd, and ds can be used.)</a>
+</ul>
+For example, 
+<a href="http://gccards.web.fc2.com/cards.html?place=plains&amp;stars=4,5&amp;border=none">http://gccards.web.fc2.com/cards.html?place=plains&amp;stars=4,5&amp;border=none</a>
+returns non-bordered 4 stars and 5 stars cards that are encountered in Berneside Plains.
+</p>
+
+</div>
+
+
+
+<div class="question" id="q_type_color">Q: What does the color of the big type mean?</div>
+<div class="answer">
+The colors denote the classification of the types into good, 
+decent, and bad types with respect to the selected card.
+Which classification is used can be set in the Options dialog.
+<span class="warning">We do not suggest that which classification
+should be used.</span>
+Set the classification with your own judgement and preference.
+Below are the colors (from good to bad).
+<ul>
+<dl>
+<dt>Ace type</dt>
+<dd><span class='ace-type'>Ace</span></dd>
+<dt>Good types</dt>
+<dd>
+    <span class='good-type10'>Good</span>
+    <span class='good-type9'>Good</span>
+    <span class='good-type8'>Good</span>
+    <span class='good-type7'>Good</span>
+</dd>
+<dt>Decent types</dt>
+<dd>
+    <span class='decent-type7'>Decent</span>
+    <span class='decent-type6'>Decent</span>
+    <span class='decent-type5'>Decent</span>
+    <span class='decent-type4'>Decent</span>
+</dd>
+<dt>Bad types</dt>
+<dd>
+    <span class='bad-type3'>Bad</span>
+    <span class='bad-type2'>Bad</span>
+    <span class='bad-type1'>Bad</span>
+</dd>
+</dl>
+</div>
+
+
+
+<div class="question" id="q_max_stats">Q: Why my max card stats are different from yours?</div>
+<div class="answer">
+The max card stats are computed from the initial values.
+Bias may exist.
+</div>
+
+
+
+<div class="question" id="q_ohko">
+Q: Why RB Ace Nuada cannot kill (one shot) RB Ace Omega
+but RB Ace Omega can be killed by (one shot by) RB Ace
+Nuada with Physical+4?
+</div>
+<div class="answer">
+<p>
+The default skills set of 
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+contains Last Stand, Greater Might (ATK+20%), and Storm Impact (Physical+4).
+With the three skills, 
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+cannot kill <a href='javascript:insertGuardian("40183", 15);'>RB Ace Omega</a>
+equipped with Weakness (Enemy ATK-20%), which is not a recommended skill of
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a>.
+</p>
+<p>
+The default skills set of
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a> 
+contains Mind Blast (Enemy WIS-20%), Vanish (Light+4), and Greater Cunning 
+(WIS+20%). With the three skills, 
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a> 
+may be killed by
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+equipped with Greater Might (ATK+20%), Storm Impact (Physical+4), and Ursince
+Aspect (ATK/DEF+10%).
+</p>
+<p>
+If the option "Ignore Non-Recommended Buff/Debuff" is enabled, then we only
+consider the case where both 
+<a href='javascript:insertGuardian("40053", 15);' class='gclnk'>RB Ace Nuada</a> 
+and
+<a href='javascript:insertGuardian("40183", 15);' class='gclnk'>RB Ace Omega</a> 
+use their default skills, and thus the results will become consistent.
+</div>
+
+<div class="question" id="q_recommended_skills">Q: Are the recommended skills always the best?</div>
+<div class="answer">
+<p>
+No.
+The best skills depend on the type and the usage of the cards.
+For example, Sphinx Empress as a physical attacker may be equipped
+with QS, ATK+20%, and Physical+4 while Sphinx Empress as an
+elemental attacker may be equipped with QS, WIS-20%, and
+Elemental+4.
+You may set your own recommended skills by the buttons in Skills&amp;Options.
+<ul>
+<li>Save - Save the recommended skills for the card of the selected type.</li>
+<li>Save for All - Save the recommended skills for the card of all types.</li>
+<li>Default - Revert the recommended skills for the card of the selected type.</li>
+<li>Default to All - Revert the recommended skills for the card of all types.</li>
+</ul>
+The data will be saved in a local storage, which can be cleared in Options.
+</p>
+<p>
+<img src='images/faq_custom_recommended_skills.jpg'/>
+</p>
+</div>
+
+<div class="question" id="q_aura">Q: Where can I find Aura cards?</div>
+<div class="answer">
+They are in <a href="excards.html">ExCards</a>.
+<ul>
+<li>They are originally called EX cards in the Japanese version.</li>
+<li>"EX" is shorter than "Aura".</li>
+</ul>
+</div>
+
+</div>
+
+<div id="footnote">
+<hr/>
+<nav id="bottom_menu">
+<ul>
+    <li><a id='nav_m_cards' href='m_cards.html' class='langdep'>Mobile Version</a> |</li>
+    <li><a id='nav_faq' href='faq.html' class='langdep'>FAQ</a> |</li>
+    <li><a id='nav_feedbacks' href="http://gccards.bbs.fc2.com/" target="_blank">Feedback</a> |</li>
+    <li><a href='https://copy.com/RkFxovuO2hOn' target="_blank">Download</a></li>
+</ul>
+</nav>
+<div>
+    Developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>
+</div>
+<div>
+  All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/">Square Enix</a> Co., Ltd.
+</div>
+<div>
+  Use of this website is at your own risk.
+  No warranty is provided.
+</div>
+<div>
+  Best viewed in <a href="http://www.apple.com/safari/" target="_blank">Safari</a>.
+</div>
+</div>
+
+</body>
+</html>

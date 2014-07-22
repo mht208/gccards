@@ -1,0 +1,285 @@
+.team_name {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+}
+
+select {
+    font-size: 11px;
+}
+
+#battle-top {
+    width: 1000px;
+}
+
+#battle-center {
+    width: 1400px;
+    height: 1000px;
+}
+
+#battle-left-line {
+    float: left;
+    margin: 10px 0px 0px 10px;
+    width: 370px;
+    height: 1200px;
+}
+
+#battle-info {
+}
+
+#battle-my-image {
+    float: left;
+    position:absolute;
+    top: 110px;
+    left: 420px;
+    width: 200px;
+}
+
+#battle-my-hp {
+    float: left;
+    position:absolute;
+    top: 420px;
+    left: 420px;
+    width: 180px;
+    height: 10px;
+}
+
+#battle-my-mp {
+    float: left;
+    position:absolute;
+    top: 435px;
+    left: 420px;
+    width: 180px;
+    height: 10px;
+}
+
+#battle-oppo-image {
+    float: left;
+    position: absolute;
+    top: 110px;
+    left: 650px;
+    width: 200px;
+}
+
+#battle-oppo-hp {
+    float: left;
+    position: absolute;
+    top: 420px;
+    left: 650px;
+    width: 180px;
+    height: 10px;
+}
+
+#battle-oppo-mp {
+    float: left;
+    position: absolute;
+    top: 435px;
+    left: 650px;
+    width: 180px;
+    height: 10px;
+}
+
+#battle-messages {
+    float: left;
+    margin: 380px 0px 0px 10px;
+}
+
+#battle-right-line {
+    float: left;
+    width: 400px;
+    margin: 10px 0px 0px 50px;
+}
+
+.battle-line-arrows {
+    display: inline-block;
+    margin: 0px 0px 0px 0px;
+}
+
+.battle-line-header {
+    font-size: 12px;
+    width: 10px;
+    display: inline-block;
+    text-align: right;
+    margin: 0px 0px 0px 0px;
+}
+
+.battle-line-stars {
+    width: 60px;
+    margin: 0px 10px 5px 10px;
+}
+
+.battle-line-border {
+    width: 250px;
+    margin: 0px 0px 0px 0px;
+}
+
+.battle-line-guardian {
+    width: 280px;
+    margin: 0px 0px 0px 10px;
+}
+
+.battle-line-avatar {
+    width: 50px;
+    display: inline-block;
+    min-width: 50px;
+    height: 1px;
+    margin: 0px 0px 0px 0px;
+    float: left;
+    z-index: 1;
+    position: relative;
+    top: 0px;
+}
+
+.battle-line-type {
+    width: 130px;
+    margin: 0px 0px 5px 8px;
+}
+
+.battle-line-level {
+    width: 50px;
+    margin: 10px 0px 0px 10px;
+}
+
+.battle-line-stoned {
+    width: 80px;
+    margin: 10px 0px 0px 10px;
+}
+
+.battle-line-skill {
+    width: 280px;
+    margin: 0px 10px 5px 58px;
+}
+
+.battle-line-favorites {
+    width: 280px;
+    margin: 0px 10px 5px 58px;
+}
+
+.battle-line-status {
+    margin: 0px 0px 5px 58px;
+    height: 30px;
+}
+
+.battle-line-ex-header {
+    font-size: 12px;
+    width: 15px;
+    display: inline-block;
+    text-align: right;
+    margin: 0px 0px 0px 0px;
+}
+
+.battle-line-ex-stars {
+    width: 60px;
+    margin: 0px 10px 5px 15px;
+}
+
+.battle-line-ex-card {
+    width: 250px;
+    margin: 0px 10px 0px 0px;
+}
+
+.battle-line-ex-avatar {
+    width: 50px;
+    display: inline-block;
+    min-width: 50px;
+    height: 1px;
+    margin: 0px 0px 0px 30px;
+    float: left;
+    z-index: 1;
+    position: relative;
+    top: 0px;
+}
+
+.battle-line-ex-skill {
+    width: 250px;
+    margin: 0px 10px 5px 100px;
+}
+
+.battle-line-ex-favorite {
+    width: 250px;
+    margin: 0px 10px 20px 100px;
+}
+
+#message {
+    font-size: 12px;
+}
+
+.ability-table {
+    text-align: right;
+}
+
+.ability-table tr td {
+    padding: 2px 10px 2px 10px;
+}
+
+.option-table {
+    text-align: right;
+}
+
+.option-table tr td {
+    padding: 2px 10px 2px 10px;
+}
+
+#my_team_avatars {
+    margin-left: 220px;
+}
+
+#oppo_team_avatars {
+    margin-left: 0px;
+}
+
+img.avatar {
+    width: 128px;
+    height: 28px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+img.defeated {
+    filter: opacity(0.5) blur(2px);
+    -webkit-filter: opacity(0.5) blur(2px);
+    -moz-filter: opacity(0.5) blur(2px);
+    -o-filter: opacity(0.5) blur(2px);
+    -ms-filter: opacity(0.5) blur(2px);
+    /* Google Chrome and Mozilla Firefox do not handle brightness correctly. */
+/*
+    filter: brightness(-0.2) blur(2px);
+    -webkit-filter: brightness(-0.2) blur(2px);
+    -moz-filter: brightness(-0.2) blur(2px);
+    -o-filter: brightness(-0.2) blur(2px);
+    -ms-filter: brightness(-0.2) blur(2px);
+*/
+}
+
+progress {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    width: 200px;
+    height: 10px;
+}
+
+proggress::-webkit-progress-bar {
+    background: #EEEEEE;
+}
+
+/* Background image is not supported by Chrome. */
+progress.hp::-webkit-progress-value {
+    background: #33FF33 url('images/battle_hp.png');
+}
+
+/* Background image is not supported by Chrome. */
+progress.mp::-webkit-progress-value {
+    background: #3333FF url('images/battle_mp.png');
+}
+
+/* -moz-progress-bar is for the value and background image is not supported in Firefox. */
+progress.hp::-moz-progress-bar {
+    background: #33FF33 url('images/battle_mp.png');
+}
+
+/* -moz-progress-bar is for the value and background image is not supported in Firefox. */
+progress.mp::-moz-progress-bar {
+    background: #3333FF url('images/battle_mp.png');
+}

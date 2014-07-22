@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Guardian Cross - Cards</title>
+<link rel="stylesheet" type="text/css" href="css/gc.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/loader.min.js"></script>
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40784747-1', 'fc2.com');
+  ga('send', 'pageview');
+
+</script>
+<link href="css/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function () {
+    Loader.load(function() {
+        Loader.loadFiles(["js/view_cards.js"], function() { cards_init(); })
+    });
+})
+</script>
+</head>
+
+<body>
+
+<nav id="top_menu">
+<ul>
+    <li><a id='nav_damage_calculator' href='index.html' class='langdep'>Calculator</a> |</li>
+    <li><a id='nav_cards' href='cards.html' class='langdep'>Cards</a> |</li>
+    <li><a id='nav_excards' href='excards.html' class='langdep'>ExCards</a> |</li>
+    <li><a id='nav_battle_simulator' href='battle.html' class='langdep'>Simulator</a> |</li>
+    <li><a id='nav_battle_simulator2' href='battle2.html' class='langdep'>Simulator II</a> |</li>
+    <li><a id='nav_comparison' href='comparison.html' class='langdep'>Comparison (<span id='comparison_number'>0</span>)</a> |</li>
+    <li><a id='nav_favorites' href='favorites.html' class='langdep'>Favorites</a> |</li>
+    <li><a id='nav_options' href='options.html' class='langdep'>Options</a> ||</li>
+    <li><a id='nav_english' href="index.html" title="English">English</a> |</li>
+    <li><a id='nav_japanese' href="index.html?lang=jp" title="Japanese">Japanese</a> |</li>
+    <li><a id='nav_android' href="http://gccand.web.fc2.com/" target="_blank">Android</a>
+      (by <a href="http://guardiancross-forum.com/User-ikubbq" target="_blank">ikubbq@GCF</a>) |</li>
+    <li><a id='nav_android' href="http://gcandcards.web.fc2.com" target="_blank">Android</a>
+      (by <a href="http://gc-forums.com/member995.html" target="_blank">Purplemandown</a>)</li>
+</ul>
+</nav>
+
+<div id="filters">
+
+<h3 class="header">Presets</h3>
+<div><ul id="presets"></ul></div>
+
+<h3 class="header">Stars</h3>
+<div><ul id="by_stars"></ul></div>
+
+<h3 class="header">Encounter Place</h3>
+<div><ul id="by_place"></ul></div>
+
+<h3 class="header">Attribute</h3>
+<div><ul id="by_attr"></ul></div>
+
+<h3 class="header">Border</h3>
+<div><ul id="by_border"></ul></div>
+
+<h3 class="header">Shape</h3>
+<div><ul id="by_shape"></ul></div>
+
+<h3 class="header">Skill</h3>
+<div><ul id="by_skill"></ul></div>
+
+<h3 class="header">Custom</h3>
+<div id="custom_selector"></div>
+
+</div>
+
+<div id="cardtable">
+</div>
+
+<div id="footnote">
+<hr/>
+<nav id="bottom_menu">
+<ul>
+    <li><a id='nav_m_cards' href='m_cards.html' class='langdep'>Mobile Version</a> |</li>
+    <li><a id='nav_faq' href='faq.html' class='langdep'>FAQ</a> |</li>
+    <li><a id='nav_feedbacks' href="http://gccards.bbs.fc2.com/" target="_blank">Feedback</a> |</li>
+    <li><a href='https://copy.com/RkFxovuO2hOn' target="_blank">Download</a></li>
+</ul>
+</nav>
+<div>
+    Developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>
+</div>
+<div>
+  All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/">Square Enix</a> Co., Ltd.
+</div>
+<div>
+  Use of this website is at your own risk.
+  No warranty is provided.
+</div>
+<div>
+  Best viewed in <a href="http://www.apple.com/safari/" target="_blank">Safari</a>.
+</div>
+</div>
+
+</body>
+
+</html>
