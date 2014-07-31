@@ -62,6 +62,7 @@ $(function() {
 killed by (one shot by) RB Ace Nuada with Physical+4?</a></li>
 <li><a href="#q_recommended_skills">Q: Are the recommended skills always the best?</a></li>
 <li><a href="#q_aura">Q: Where can I find Aura cards?</a></li>
+<li><a href="#q_contribute">Q: How do I contribute?</a></li>
 </ul>
 
 <hr/>
@@ -299,6 +300,50 @@ They are in <a href="excards.html">ExCards</a>.
 </ul>
 </div>
 
+<div class="question" id="q_contribute">Q: How do I contribute?</div>
+<div class="answer">
+</div>
+Requirements:
+<ul>
+<li><a href="http://git-scm.com">Git</a></li>
+<li><a href="https://developers.google.com/closure/compiler/">Google Closure Compiler</a></li>
+<li><a href="http://yui.github.io/yuicompressor/">YUI Compressor</a></li>
+<li>GNU make</li>
+<li>sips from Mac OS (for image processing)</li>
+<li>ImageMagick (for image processing)</li>
+</ul>
+
+Instructions:
+<ol>
+<li>Clone the <a href="https://github.com/mht208/gccards">project repository</a> from GitHub.</li>
+<li>Make changes. Most data are stored in js/???.js.
+  <ul>
+  <li>?s.js: Data of cards with ? stars.</li>
+  <li>?s_jp.js: Data of cards with ? stars for the Japanese version.</li>
+  <li>gc.js: Data of hunting grounds, events, borders, attributes, types,
+  skills, silhouettes, and many others.</li>
+  <li>evaluation.js: Data of type classification.</li>
+  <li>loader.js: A loader for loading required Javascript files.</li>
+  <li>locale.js: Some names. Every name in the Japanese version must have
+  a translated name in the international version and vice versa.</li>
+  <li>new.js: What's new.</li>
+  <li>new_jp.js: What's new for the Japanese version.</li>
+  <li>simulator.js: Battle simulator.</li>
+  <li>version.js: Version number. This file is automatically updated after make.</li>
+  <li>view_???.js: Code for displaying webpages.</li>
+  </ul>
+</li>
+<li>Run "make" to generate js/???.min.js.</li>
+<li>Check if the webpages can be displayed correctly.</li>
+<li>Send pull requests.</li>
+</ol>
+
+Note:
+<ol>
+<li>Please do not add card images to the repository.</li>
+<li>Please use spaces rather than tabs.</li>
+</ol>
+
 </div>
 
 <div id="footnote">
@@ -312,7 +357,7 @@ They are in <a href="excards.html">ExCards</a>.
 </ul>
 </nav>
 <div>
-    Developed by <a href="http://guardiancross-forum.com/User-zechs">zechs@gcf</a>
+    <a href="https://github.com/mht208/gccards">Project home</a> at GitHub
 </div>
 <div>
   All images are owned by <a href="http://www.square-enix.co.jp/smart/gc/">Square Enix</a> Co., Ltd.
